@@ -1,0 +1,26 @@
+# ======
+# IDEs
+# ======
+.vscode/
+.idea/
+.vs/
+
+# ======
+# Python
+# ======
+.pytest_cache/
+__pycache__/
+*.egg-info/
+
+# ======
+# output
+# ======
+bin/
+build/
+target/
+dist/
+
+# ======
+# Others
+# ======
+*.log

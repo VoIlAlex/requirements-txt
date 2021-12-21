@@ -1,9 +1,5 @@
 from distutils.core import setup
 import os
-import ast
-import sys
-import subprocess
-import logging
 from setuptools import find_packages
 from setuptools.command.install import install
 
@@ -31,7 +27,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.0.2',
+	version='1.0.3',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
@@ -54,7 +50,8 @@ setup(
 	# List of packages to install with this one 
 	install_requires=[
 		'appdata==2.1.1',
-		'loguru==0.5.3'
+		'loguru==0.5.3',
+		'click==8.0.3',
 	],
 	cmdclass={
 		'install': PostInstallCommand,

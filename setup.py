@@ -1,14 +1,28 @@
 from distutils.core import setup
 import os
+import ast
+import sys
+import subprocess
+import logging
 from setuptools import find_packages
+from setuptools.command.install import install
 
 # User-friendly description from README.md
+from requirements_txt.install import install as requirements_install
+
 current_directory = os.path.dirname(os.path.abspath(__file__))
 try:
-    with open(os.path.join(current_directory, 'README.md'), encoding='utf-8') as f:
-        long_description = f.read()
+	with open(os.path.join(current_directory, 'README.md'), encoding='utf-8') as f:
+		long_description = f.read()
 except Exception:
-    long_description = ''
+	long_description = ''
+
+
+class PostInstallCommand(install):
+	def run(self):
+		install.run(self)
+		requirements_install()
+
 
 setup(
 	# Name of the package 
@@ -39,6 +53,9 @@ setup(
 	keywords=[],
 	# List of packages to install with this one 
 	install_requires=[],
+	package_data={
+		"new_pip": "static/new_pip.py"
+	},
 	# https://pypi.org/classifiers/ 
 	classifiers=[
 		'Development Status :: 1 - Planning',

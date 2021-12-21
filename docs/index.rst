@@ -1,6 +1,17 @@
 Pip install to requirements.txt
 =======================================
 
+.. image:: https://img.shields.io/pypi/v/to-requirements.txt
+
+.. image:: https://img.shields.io/readthedocs/requirements-txt
+
+.. image:: https://img.shields.io/maintenance/yes/2021
+
+.. image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
+
+.. image:: https://img.shields.io/github/license/VoIlAlex/requirements-txt
+
+
 .. meta::
    :description lang=en: Add modules to requirements.txt installing packages with pip.
 

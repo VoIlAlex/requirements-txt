@@ -52,9 +52,17 @@ setup(
 	# List of keywords 
 	keywords=[],
 	# List of packages to install with this one 
-	install_requires=[],
-	package_data={
-		"new_pip": "static/new_pip.py"
+	install_requires=[
+		'appdata==2.1.1',
+		'loguru==0.5.3'
+	],
+	cmdclass={
+		'install': PostInstallCommand,
+	},
+	entry_points={
+		'console_scripts': [
+			'requirements-txt = requirements_txt.command:cli',
+		],
 	},
 	# https://pypi.org/classifiers/ 
 	classifiers=[

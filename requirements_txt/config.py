@@ -59,9 +59,9 @@ def get_config_value(key, app_paths):
     value = config['DEFAULT'].get(key, ALLOWED_CONFIG_KEYS[key].get('default', None))
     if value is not None:
         type_ = ALLOWED_CONFIG_KEYS[key].get('type', str)
-        if isinstance(type_, bool):
+        if type_ is bool:
             return True if value == '1' else False
-        elif isinstance(type_, float):
+        elif type_ is float:
             return float(value)
         else:
             return value

@@ -21,7 +21,7 @@ def cli():
 
 
 @cli.command()
-@click.option('-g', '--global', 'global_', type=bool, default=False, help='Write to global configuration.')
+@click.option('-g', '--global', 'global_', is_flag=True, help='Write to global configuration.')
 @click.argument('key', required=False)
 @click.argument('value', required=False)
 def config(key, value, global_):

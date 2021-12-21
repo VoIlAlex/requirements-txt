@@ -58,4 +58,3 @@ Visit the file [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 Visit the file [MIT](LICENSE.md).
-

@@ -4,8 +4,6 @@ from setuptools import find_packages
 from setuptools.command.install import install
 
 # User-friendly description from README.md
-from requirements_txt.install import install as requirements_install
-
 current_directory = os.path.dirname(os.path.abspath(__file__))
 try:
 	with open(os.path.join(current_directory, 'README.md'), encoding='utf-8') as f:
@@ -16,6 +14,7 @@ except Exception:
 
 class PostInstallCommand(install):
 	def run(self):
+		from requirements_txt.install import install as requirements_install
 		install.run(self)
 		requirements_install()
 
@@ -27,7 +26,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.0.3',
+	version='1.0.4',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 

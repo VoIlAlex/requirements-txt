@@ -1,6 +1,6 @@
 import configparser
-
-from requirements_txt.utils import insert_app_paths
+import os
+from requirements_txt.utils import insert_app_paths, get_app_paths
 
 ALLOWED_CONFIG_KEYS = {
     'only_git': {
@@ -37,25 +37,37 @@ def get_allowed_types(value: str):
     return types
 
 
-@insert_app_paths
-def read_config(app_paths):
+def read_config(global_=False):
+    app_paths_list = []
+    if isinstance(global_, bool):
+        app_paths = get_app_paths(global_)
+        app_paths_list.append(app_paths)
+    else:
+        app_paths_list.append(
+            get_app_paths(False)
+        )
+        app_paths = get_app_paths(True)
+        if os.path.exists(app_paths.config_path):
+            app_paths_list.append(
+                app_paths
+            )
+
     config = configparser.ConfigParser()
-    config.read(app_paths.config_path)
+    config.read([x.config_path for x in app_paths_list])
     return config
 
 
-@insert_app_paths
-def save_config(config, app_paths):
+def save_config(config, global_=False):
+    app_paths = get_app_paths(global_)
     with open(app_paths.config_path, 'w+') as f:
         config.write(f)
 
 
-@insert_app_paths
-def get_config_value(key, app_paths):
+def get_config_value(key, global_=None):
     if key not in ALLOWED_CONFIG_KEYS.keys():
         raise RuntimeError('Wrong key.')
 
-    config = read_config()
+    config = read_config(global_=global_)
     value = config['DEFAULT'].get(key, ALLOWED_CONFIG_KEYS[key].get('default', None))
     if value is not None:
         type_ = ALLOWED_CONFIG_KEYS[key].get('type', str)

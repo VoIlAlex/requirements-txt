@@ -1,6 +1,5 @@
 from functools import wraps
 import os
-from loguru import logger
 from appdata import AppDataPaths
 
 
@@ -24,9 +23,4 @@ def insert_app_paths(func):
 
 @insert_app_paths
 def setup_logging(app_paths: AppDataPaths):
-    error_path = app_paths.get_config_path(name='error')
-    if not os.path.exists(error_path):
-        with open(error_path, 'w+') as f:
-            pass
-    logger.add(error_path, level='ERROR')
-    return logger
+    pass

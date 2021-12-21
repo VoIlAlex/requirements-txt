@@ -1,9 +1,8 @@
+import logging
 import os.path
 import re
 import subprocess
 import sys
-
-from loguru import logger
 
 from requirements_txt.utils import insert_app_paths
 
@@ -30,7 +29,7 @@ def _get_pip_path(pip_name):
             python_name = python_version_pattern.search(pip_version_data).groups()[0]
             return pip_path, python_name
     except Exception:
-        logger.warning('pip not found.')
+        logging.error('pip not found.')
     return None, None
 
 
@@ -44,7 +43,7 @@ def _get_python_path(python_name):
         if python_path:
             return python_path
     except Exception:
-        logger.warning('python not found.')
+        logging.error('python not found.')
 
 
 def _override_pip(pip_path, python_path):

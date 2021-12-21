@@ -14,11 +14,19 @@ Global settings are used as default as local settings are not specified.
 View the config
 _______________
 
-The following command will output the
+The following command will output the local config or to-requirements.txt:
 
 .. code-block::
 
      requirements-txt config
+
+
+The following command will output the global config or to-requirements.txt:
+
+.. code-block::
+
+     requirements-txt config --global
+
 
 
 Enable / Disable the package

@@ -26,7 +26,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.1.1',
+	version='1.1.2',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
@@ -59,12 +59,22 @@ setup(
 			'requirements-txt = requirements_txt.command:cli',
 		],
 	},
-	# https://pypi.org/classifiers/ 
+	# https://pypi.org/classifiers/
 	classifiers=[
-		'Development Status :: 1 - Planning',
+		'Development Status :: 4 - Beta',
+		'Environment :: Console',
+		'Intended Audience :: Developers',
+		'License :: OSI Approved :: MIT License',
+		'Operating System :: Unix',
+		'Topic :: Software Development',
+		'Topic :: System :: Installation/Setup',
+		'Topic :: Terminals',
+		'Topic :: Utilities',
 		'Programming Language :: Python :: 3.5',
 		'Programming Language :: Python :: 3.6',
 		'Programming Language :: Python :: 3.7',
-		'Programming Language :: Python :: 3.8'
+		'Programming Language :: Python :: 3.8',
+		'Programming Language :: Python :: 3.9',
+		'Programming Language :: Python :: 3.10',
 	]
 )

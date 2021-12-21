@@ -3,6 +3,7 @@ import click
 import configparser
 from appdata import AppDataPaths
 
+from requirements_txt.install import install
 
 if __name__ == '__main__':
     import sys
@@ -60,6 +61,11 @@ def config(key, value, app_paths: AppDataPaths):
             config['DEFAULT'] = {}
         config['DEFAULT'][key] = value
         save_config(config)
+
+
+@cli.command()
+def setup():
+    install()
 
 
 if __name__ == '__main__':

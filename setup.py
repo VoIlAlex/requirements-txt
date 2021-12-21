@@ -14,8 +14,8 @@ except Exception:
 
 class PostInstallCommand(install):
 	def run(self):
-		from requirements_txt.install import install as requirements_install
 		install.run(self)
+		from requirements_txt.install import install as requirements_install
 		requirements_install()
 
 
@@ -26,7 +26,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.0.5',
+	version='1.0.6',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 

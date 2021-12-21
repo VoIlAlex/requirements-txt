@@ -4,8 +4,6 @@ import re
 import subprocess
 import sys
 
-from requirements_txt.utils import insert_app_paths
-
 
 def _get_destination_command():
     if sys.platform in ['win32', 'cygwin']:
@@ -61,8 +59,7 @@ def _override_pip(pip_path, python_path):
             )
 
 
-@insert_app_paths
-def install(app_paths):
+def install():
     pip_paths = []
     for pip in ['pip', 'pip3']:
         pip_path, python_name = _get_pip_path(pip)

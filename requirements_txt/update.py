@@ -10,7 +10,9 @@ from pip._vendor.pkg_resources import _initialize_master_working_set
 def add_installed_packages_to_requirements_txt(args):
     packages_names = [x.split('==')[0] for x in args if not x.startswith('-')]
     _initialize_master_working_set()
-    packages = [(x.name, x.version) for x in search_packages_info(packages_names)]
+    get_package_data = lambda package_info: (package_info['name'], package_info['version']) \
+        if hasattr(package_info, '__getattr__') else (package_info.name, package_info.version)
+    packages = [get_package_data(x) for x in search_packages_info(packages_names)]
     git_only = get_config_value('only_git')
     if git_only:
         git_path = os.path.join(
@@ -62,7 +64,9 @@ def add_installed_packages_to_requirements_txt(args):
 def remove_uninstalled_packages_from_requirements_txt(args):
     packages_names = set([x.split('==')[0].strip() for x in args if not x.startswith('-')])
     _initialize_master_working_set()
-    packages = {x.name: x.version for x in search_packages_info(list(packages_names))}
+    get_package_name = lambda package_info: package_info['name'] if hasattr(package_info, '__getitem__') else package_info.name
+    get_package_version = lambda package_info: package_info['version'] if hasattr(package_info, '__getitem__') else package_info.version
+    packages = {get_package_name(x): get_package_version(x) for x in search_packages_info(list(packages_names))}
 
     git_only = get_config_value('only_git')
     if git_only:

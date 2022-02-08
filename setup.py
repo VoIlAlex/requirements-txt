@@ -26,13 +26,13 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.1.6',
+	version='1.1.7',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
 	license='MIT',
 	# Short description of your library 
-	description='Reserved for future.',
+	description='Automatically add and delete modules to requirements.txt installing them using pip.',
 	# Long description of your library 
 	long_description=long_description,
 	long_description_content_type='text/markdown',

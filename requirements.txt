@@ -1,2 +1,2 @@
-appdata==2.1.1
+appdata==2.1.2
 click==8.0.3

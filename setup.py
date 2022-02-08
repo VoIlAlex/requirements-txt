@@ -48,7 +48,7 @@ setup(
 	keywords=[],
 	# List of packages to install with this one 
 	install_requires=[
-		'appdata==2.1.1',
+		'appdata==2.1.2',
 		'click==8.0.3',
 	],
 	cmdclass={

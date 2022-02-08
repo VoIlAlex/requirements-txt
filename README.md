@@ -5,12 +5,11 @@
 [![Documentation](https://img.shields.io/readthedocs/requirements-txt)](https://requirements-txt.readthedocs.io/en/latest/)
 
 
-[![Maintainability](https://img.shields.io/maintenance/yes/2021)](https://img.shields.io/maintenance/yes/2021)
+[![Maintainability](https://img.shields.io/maintenance/yes/2022)](https://img.shields.io/maintenance/yes/2022)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License](https://img.shields.io/github/license/VoIlAlex/requirements-txt)](https://github.com/VoIlAlex/requirements-txt/blob/master/LICENSE.md)
 
 [//]: # ([![Downloads]&#40;https://static.pepy.tech/personalized-badge/to-requirements.txt?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads&#41;]&#40;https://pepy.tech/project/appdata&#41;)
-
 
 [//]: # ([![Linux]&#40;https://svgshare.com/i/Zhy.svg&#41;]&#40;https://svgshare.com/i/Zhy.svg&#41;)
 

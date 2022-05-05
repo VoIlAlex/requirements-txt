@@ -117,14 +117,14 @@ To disallow the package to create requirements.txt if it does not exist:
 
 .. code-block::
 
-    requirements-txt config allow_create 1
+    requirements-txt config allow_create 0
 
 
 To disallow the package to create requirements.txt if it does not exist globally:
 
 .. code-block::
 
-    requirements-txt config --global allow_create 1
+    requirements-txt config --global allow_create 0
 
 
 Config files

@@ -26,7 +26,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.1.9',
+	version='1.1.10',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
@@ -43,7 +43,7 @@ setup(
 	# Either the link to your github or to your website 
 	url='https://github.com/VoIlAlex/requirements-txt',
 	# Link from which the project can be downloaded 
-	download_url='https://github.com/VoIlAlex/requirements-txt/archive/refs/tags/v1.1.9.zip',
+	download_url='https://github.com/VoIlAlex/requirements-txt/archive/refs/tags/v1.1.10.zip',
 	# List of keywords 
 	keywords=[
 		'pip',

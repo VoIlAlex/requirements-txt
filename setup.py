@@ -12,13 +12,6 @@ except Exception:
 	long_description = ''
 
 
-class PostInstallCommand(install):
-	def run(self):
-		install.run(self)
-		from requirements_txt.install import install as requirements_install
-		requirements_install()
-
-
 setup(
 	# Name of the package 
 	name='to-requirements.txt',
@@ -59,11 +52,8 @@ setup(
 	install_requires=[
 		'appdata==2.1.2',
 		'click==8.0.3',
-		'colored==1.4.3'
+		'colored==1.4.3',
 	],
-	cmdclass={
-		'install': PostInstallCommand,
-	},
 	entry_points={
 		'console_scripts': [
 			'requirements-txt = requirements_txt.command:cli',

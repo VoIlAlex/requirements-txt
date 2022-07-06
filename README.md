@@ -17,14 +17,21 @@
 
 [//]: # ([![macOS]&#40;https://svgshare.com/i/ZjP.svg&#41;]&#40;https://svgshare.com/i/ZjP.svg&#41;)
 
-**to-requirements.txt** allows to automatically add and delete modules to requirements.txt installing
-them using **pip**.
+**to-requirements.txt** allows to automatically manage dependencies in requirements.txt using **pip** as a package manager.
+
+
+[![Demo](https://media.giphy.com/media/y9dUiCm2SwaU8qR0eD/giphy.gif)](https://media.giphy.com/media/y9dUiCm2SwaU8qR0eD/giphy.gif)
+
 
 ## Benefits
 
 **Easy to setup.**
 The installation process include only two steps: install the package using pip
 and setup up it using script provided by the package. That's it.
+
+**Setup in one command.**
+You can set up VirtualEnv-based project in one command. It will create virtual environment.
+And install *to-requirements.txt* automatically.
 
 **Customizable.**
 Customize it the way you like: use it only in git repositories, allow or disallow
@@ -53,7 +60,7 @@ pip install to-requirements.txt
 And after that run the command below to initialize the package:
 
 ```shell
-requirements-txt setup
+requirements-txt install
 ```
 
 It will update your current *pip* scripts to execute the functionality of
@@ -62,6 +69,17 @@ this package.
 *The changes made to **pip** scripts will not affect ordinary *pip* workflow after
 uninstalling **to-requirements.txt**.*
 
+### Setup project
+
+To set up VirtualEnv based project just type:
+```shell
+requirements-txt init
+```
+
+The same effect could be achieved much easier with aliases:
+```shell
+rt i
+```
 
 ## Documentation
 

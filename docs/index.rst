@@ -66,3 +66,4 @@ In this section you will get started with the package.
 .. toctree::
 
     intro/configuration
+    intro/usage

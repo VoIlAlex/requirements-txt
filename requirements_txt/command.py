@@ -2,24 +2,24 @@ import os
 import click
 import configparser
 
-from requirements_txt.install import install
+from requirements_txt.install import install as install_to_requirements_txt, init_virtual_env
+from requirements_txt.show import show_requirements_txt
 
 if __name__ == '__main__':
     import sys
     sys.path.append(os.getcwd())
 
 
-from requirements_txt.utils import setup_logging, get_app_paths, validate_app_data_decorator
-from requirements_txt.utils import validate_app_data
+from requirements_txt.utils.appdata import get_app_paths, validate_app_data_decorator, validate_app_data
 from requirements_txt.config import get_allowed_types, ALLOWED_CONFIG_KEYS, read_config, save_config
 
 
 @click.group()
 @validate_app_data_decorator
 def cli():
-    setup_logging()
+    ...
 
-
+# Config
 @cli.command()
 @click.option('-g', '--global', 'global_', is_flag=True, help='Write to global configuration.')
 @click.argument('key', required=False)
@@ -66,8 +66,37 @@ def config(key, value, global_):
 
 
 @cli.command()
-def setup():
-    install()
+def install():
+    """Install to-requirements.txt to the module."""
+    install_to_requirements_txt()
+
+
+# Init
+@cli.command()
+@click.option('-v', '--verbose', is_flag=True, help='Show installation process logs.')
+def init(verbose):
+    """Initialize virtualenv project."""
+    init_virtual_env(verbose)
+
+
+@cli.command()
+@click.option('-v', '--verbose', is_flag=True, help='Show installation process logs.')
+def i(verbose):
+    """Initialize virtualenv project. (alias)"""
+    init_virtual_env(verbose)
+
+
+# Show
+@cli.command()
+def show():
+    """Show requirements.txt contents."""
+    show_requirements_txt()
+
+
+@cli.command()
+def s():
+    """Show requirements.txt contents. (alias)"""
+    show_requirements_txt()
 
 
 if __name__ == '__main__':

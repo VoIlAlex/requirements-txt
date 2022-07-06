@@ -21,7 +21,7 @@ if __name__ == '__main__':
     if requirements_handler and res == 0:
         disable = get_config_value('disable')
         if not disable:
-            if command == 'install':
+            if command == 'install' and '-r' not in args:
                 add_installed_packages_to_requirements_txt(args)
             if command == 'uninstall':
                 remove_uninstalled_packages_from_requirements_txt(args)

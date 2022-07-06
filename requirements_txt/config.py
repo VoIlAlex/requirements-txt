@@ -1,6 +1,7 @@
 import configparser
 import os
-from requirements_txt.utils import insert_app_paths, get_app_paths
+from requirements_txt.utils.appdata import get_app_paths
+
 
 ALLOWED_CONFIG_KEYS = {
     'only_git': {

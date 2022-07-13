@@ -1,10 +1,8 @@
-import logging
 import os.path
 import subprocess
 import sys
 
 from requirements_txt.utils.check import is_pip_name
-from requirements_txt.utils.consts import ALL_DONE
 from requirements_txt.utils.logging import logger, show_all_dome_message, set_verbose
 from requirements_txt.utils.path import get_pip_path, get_python_path, find_virtualenv
 

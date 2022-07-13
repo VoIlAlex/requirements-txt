@@ -1,0 +1,146 @@
+#!/bin/bash
+
+# To use full functionality of rt you should
+# put this lines into your .bashrc, .zshrc or alternatives:
+#
+# alias rt=". rt"
+#
+# Benefits:
+#    - Activating virtual environment on `rt i`
+
+
+
+# Check if the script runs in "source rt" mode.
+
+sourced=0
+if [ -n "$ZSH_VERSION" ]; then
+  case $ZSH_EVAL_CONTEXT in *:file) sourced=1;; esac
+elif [ -n "$KSH_VERSION" ]; then
+  [ "$(cd -- "$(dirname -- "$0")" && pwd -P)/$(basename -- "$0")" != "$(cd -- "$(dirname -- "${.sh.file}")" && pwd -P)/$(basename -- "${.sh.file}")" ] && sourced=1
+elif [ -n "$BASH_VERSION" ]; then
+  (return 0 2>/dev/null) && sourced=1
+else # All other shells: examine $0 for known shell binary filenames.
+     # Detects `sh` and `dash`; add additional shell filenames as needed.
+  case ${0##*/} in sh|-sh|dash|-dash) sourced=1;; esac
+fi
+
+
+
+# Activating virtual environment function
+
+contains() {
+    [[ $list =~ (^| )$x($| ) ]] && echo '0' || echo '1'
+}
+
+activate_virtual_env() {
+  for file in $(ls)
+  do
+      if [[ -d "./$file" ]]
+      then
+          files_in_folder=$(ls "./$file")
+          pyvenv_exists=$(contains files_in_folder "pyvenv.cfg")
+          bin_exists=$(contains files_in_folder "bin")
+
+          if [ "$pyvenv_exists" = "0" ] && [ "$bin_exists" = "0" ]
+          then
+              source "./$file/bin/activate"
+              break 2
+          fi
+      fi
+  done
+}
+
+
+# Handle alias command
+
+add_line_to_file_if_no_exists () {
+  if ! grep -qxF "$1" $2
+  then
+    echo "$1" >> $2
+    echo "1"
+  fi
+}
+
+
+set_rt_alias_to_file () {
+  is_set="0"
+  if [[ -f $1 ]]
+  then
+    line_added=$(add_line_to_file_if_no_exists 'alias rt=". rt"' $1)
+    if [ "$line_added" = "1" ]
+    then
+      is_set="1"
+    fi
+
+    line_added=$(add_line_to_file_if_no_exists 'alias requirements-txt=". requirements-txt"' $1)
+    if [ "$line_added" = "1" ]
+    then
+      is_set="1"
+    fi
+  fi
+  echo $is_set
+}
+
+
+if [ "$1" = "alias" ]
+then
+  if [ "$sourced" = "0" ]
+  then
+    is_rt_alias_set=false
+    set_rt_alias_to_file_result=$(set_rt_alias_to_file ~/.bashrc)
+    if [ "$set_rt_alias_to_file_result" = "1" ]
+    then
+      is_rt_alias_set=true
+    fi
+
+    set_rt_alias_to_file_result=$(set_rt_alias_to_file ~/.zshrc)
+    if [ "$set_rt_alias_to_file_result" = "1" ]
+    then
+      is_rt_alias_set=true
+    fi
+
+    if [ "$is_rt_alias_set" = false ]
+    then
+      echo "You are already aliased."
+    fi
+  else
+    echo "You are already in the sourced mode."
+  fi
+else
+  # Run internal python cli
+
+  python3 -m requirements_txt $@
+
+
+  # Activate virtual environment
+
+  if [ "$sourced" = "1" ]
+  then
+      for arg in "$@"
+      do
+          if [ "$arg" = "i" ] || [ "$arg" = "init" ]
+          then
+              activate_virtual_env
+          fi
+      done
+  else
+      for arg in "$@"
+      do
+          if [ "$arg" = "--help" ] || [ "$arg" = "-h" ] || [ "$arg" = "i" ] || [ "$arg" = "init" ]
+          then
+              echo ""
+              echo "You should consider aliasing your requirements-txt to activate its full functionality."
+              echo "To do this put these lines to your .bashrc, .zshrc or other .*rc file:"
+              echo ""
+              echo "alias rt=\". rt\""
+              echo "alias requirements-txt=\". requirements-txt\""
+              echo ""
+              echo "Or just run the command below:"
+              echo ""
+              echo "rt alias"
+              echo ""
+          fi
+      done
+  fi
+fi
+

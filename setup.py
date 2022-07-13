@@ -56,10 +56,14 @@ setup(
 	],
 	entry_points={
 		'console_scripts': [
-			'requirements-txt = requirements_txt.command:cli',
-			'rt = requirements_txt.command:cli'
+			'requirements-txt-cli = requirements_txt.command:cli',
+			'rt-cli = requirements_txt.command:cli'
 		],
 	},
+	scripts=[
+		'scripts/rt',
+		'scripts/requirements-txt'
+	],
 	# https://pypi.org/classifiers/
 	classifiers=[
 		'Development Status :: 5 - Production/Stable',

@@ -7,4 +7,3 @@ def get_destination_command():
     else:
         command = 'which'
     return command
-

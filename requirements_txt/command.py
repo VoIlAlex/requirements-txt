@@ -99,5 +99,14 @@ def s():
     show_requirements_txt()
 
 
+# Alias (real implementation in bash script
+@cli.command()
+def alias():
+    """
+    Put aliases to your .bashrc, .zshrc or others. Allows to activate virtual environment using "rt i".
+    """
+    ...
+
+
 if __name__ == '__main__':
     cli()

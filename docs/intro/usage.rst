@@ -6,7 +6,7 @@ Usage
 
 In this section you can find docs on how to use requirements-txt command line tool.
 
-Alias
+Basic usage
 ---------------
 
 There are two ways to use requirements-txt command line tool. The first one is:
@@ -22,6 +22,30 @@ The second one is to use alias:
     rt <command> <options>
 
 Both commands results in the same outcome. It's just an alias.
+
+
+Alias
+---------------
+
+To activate full potential of the cli you should add following lines to your
+.bashrc, .zshrc or other .*rc file:
+
+.. code-block::
+
+    alias rt=". rt"
+    alias requirements-txt=". requirements-txt"
+
+It will allow requirements-txt cli to activate your environment and init command.
+You can also achieve this by the command:
+
+.. code-block::
+
+    rt alias
+
+This command will work for the following shells:
+
+* bash
+* zsh
 
 
 Init

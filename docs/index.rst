@@ -52,7 +52,25 @@ And after that run the command below to initialize the package:
     requirements-txt setup
 
 It will update your current *pip* scripts to execute the functionality of
-this package.
+this package. Also, if you want to enable all the available functionality of
+the package you should put the lines below to your .bashrc, .zshrc or other
+.*rc file:
+
+.. code-block::
+
+    alias rt=". rt"
+    alias requirements-txt=". requirements-txt"
+
+
+Or simply use the cli command:
+
+.. code-block::
+
+    rt alias
+
+
+It will enable sourced mode of the cli execution and the cli will be able
+to activate your virtual environment / deactivate it if required.
 
     The changes made to *pip* scripts will not affect ordinary *pip* workflow after
     uninstalling *to-requirements.txt*.

@@ -19,6 +19,7 @@ from requirements_txt.config import get_allowed_types, ALLOWED_CONFIG_KEYS, read
 def cli():
     ...
 
+
 # Config
 @cli.command()
 @click.option('-g', '--global', 'global_', is_flag=True, help='Write to global configuration.')

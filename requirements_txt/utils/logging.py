@@ -1,6 +1,6 @@
 import sys
 import logging
-from colored import fg, bg, attr
+from colored import fg, attr
 
 from requirements_txt.utils.consts import ALL_DONE
 

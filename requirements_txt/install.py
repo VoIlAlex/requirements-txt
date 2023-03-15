@@ -40,7 +40,7 @@ def init_virtual_env(verbose=False):
     if os.path.exists('./requirements.txt'):
         logger.info(' Skip.\n')
     else:
-        with open('./requirements.txt', 'w+') as f:
+        with open('./requirements.txt', 'w+'):
             ...
         logger.info(' Done.\n')
 

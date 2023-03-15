@@ -10,8 +10,13 @@ from pip._vendor.pkg_resources import _initialize_master_working_set
 def add_installed_packages_to_requirements_txt(args):
     packages_names = [x.split('==')[0] for x in args if not x.startswith('-') and x != '.']
     _initialize_master_working_set()
-    get_package_data = lambda package_info: (package_info['name'], package_info['version']) \
-        if isinstance(package_info, dict) else (package_info.name, package_info.version)
+
+    def get_package_data(package_info):
+        if isinstance(package_info, dict):
+            return package_info['name'], package_info['version']
+        else:
+            return package_info.name, package_info.version
+
     packages = [get_package_data(x) for x in search_packages_info(packages_names)]
     git_only = get_config_value('only_git')
     if git_only:
@@ -64,8 +69,19 @@ def add_installed_packages_to_requirements_txt(args):
 def remove_uninstalled_packages_from_requirements_txt(args):
     packages_names = set([x.split('==')[0].strip() for x in args if not x.startswith('-')])
     _initialize_master_working_set()
-    get_package_name = lambda package_info: package_info['name'] if isinstance(package_info, dict) else package_info.name
-    get_package_version = lambda package_info: package_info['version'] if isinstance(package_info, dict) else package_info.version
+
+    def get_package_name(package_info):
+        if isinstance(package_info, dict):
+            return package_info['name']
+        else:
+            return package_info.name
+
+    def get_package_version(package_info):
+        if isinstance(package_info, dict):
+            return package_info['version']
+        else:
+            return package_info.version
+
     packages = {get_package_name(x): get_package_version(x) for x in search_packages_info(list(packages_names))}
 
     git_only = get_config_value('only_git')

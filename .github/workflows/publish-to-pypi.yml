@@ -1,7 +1,9 @@
 name: Build
 
 on:
-  push: tags
+  push:
+    tags:
+      - '*'
 
 jobs:
   build-n-publish:

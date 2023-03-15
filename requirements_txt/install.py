@@ -3,7 +3,7 @@ import subprocess
 import sys
 
 from requirements_txt.utils.check import is_pip_name
-from requirements_txt.utils.logging import logger, show_all_dome_message, set_verbose
+from requirements_txt.utils.logging import logger, show_all_done_message, set_verbose
 from requirements_txt.utils.path import get_pip_path, get_python_path, find_virtualenv
 
 
@@ -54,7 +54,7 @@ def init_virtual_env(verbose=False):
     logger.info('Setting up to-requirements.txt...')
     install_for_venv()
     logger.info(' Done.\n')
-    show_all_dome_message()
+    show_all_done_message()
 
 
 def install():

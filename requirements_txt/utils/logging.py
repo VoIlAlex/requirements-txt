@@ -21,7 +21,7 @@ def set_verbose(verbose=False):
         logger_handler.terminator = ""
 
 
-def show_all_dome_message():
+def show_all_done_message():
     message = ALL_DONE
     final_message = ''
     for line in message.split('\n'):

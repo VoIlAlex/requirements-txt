@@ -4,18 +4,22 @@ import subprocess
 from requirements_txt.utils.crossplatform import get_destination_command
 
 
+def _execute_command(args):
+    pipe = subprocess.Popen(args, stdout=subprocess.PIPE)
+    output = str(pipe.communicate()[0].decode()).replace('\n', '')
+    return output
+
+
 def get_pip_path(pip_name=None):
     command = get_destination_command()
     pips_to_try = [pip_name] if pip_name else ['pip', 'pip3']
     for pip_to_try in pips_to_try:
         try:
-            pip_command_pipe = subprocess.Popen([command, pip_to_try], stdout=subprocess.PIPE)
-            pip_path = str(pip_command_pipe.communicate()[0].decode()).replace('\n', '')
+            pip_path = _execute_command([command, pip_to_try])
             if pip_path.startswith(pip_to_try):
                 pip_path = None
             if pip_path:
-                pip_version_pipe = subprocess.Popen([pip_to_try, '--version'], stdout=subprocess.PIPE)
-                pip_version_data = str(pip_version_pipe.communicate()[0].decode()).replace('\n', '')
+                pip_version_data = _execute_command([pip_to_try, '--version'])
                 python_version_pattern = re.compile('.*(python(.*?))/.*')
                 python_name = python_version_pattern.search(pip_version_data).groups()[0]
                 break
@@ -31,9 +35,8 @@ def get_python_path(python_name=None):
     pythons_to_try = [python_name] if python_name else ['python3', 'python']
     for python_to_try in pythons_to_try:
         try:
-            python_command_pipe = subprocess.Popen([command, python_name], stdout=subprocess.PIPE)
-            python_path = str(python_command_pipe.communicate()[0].decode()).replace('\n', '')
-            if python_path.startswith(python_name):
+            python_path = _execute_command([command, python_to_try])
+            if python_path.startswith(python_to_try):
                 python_path = None
             if python_path:
                 return python_path

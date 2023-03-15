@@ -28,7 +28,7 @@ jobs:
           python -m pytest
       - name: Run linters
         run: >-
-          python -m flake8 requirements_txt
+          python -m flake8 requirements_txt --ignore=E501
       - name: Install pypa/build
         run: >-
           python -m

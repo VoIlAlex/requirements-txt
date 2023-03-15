@@ -49,7 +49,5 @@ def find_virtualenv(path: str = None) -> str:
     for file in os.listdir(path):
         if os.path.isdir(file):
             files_in_dir = os.listdir(file)
-            if 'bin' in files_in_dir \
-                and 'lib' in files_in_dir \
-                and 'pyvenv.cfg' in files_in_dir:
+            if 'bin' in files_in_dir and 'lib' in files_in_dir and 'pyvenv.cfg' in files_in_dir:
                 return os.path.join(path, file)

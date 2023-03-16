@@ -1,5 +1,7 @@
 import configparser
 import os
+from typing import List, Optional, Any
+
 from requirements_txt.utils.appdata import get_app_paths
 
 
@@ -19,7 +21,7 @@ ALLOWED_CONFIG_KEYS = {
 }
 
 
-def get_allowed_types(value: str):
+def get_allowed_types(value: str) -> List[type]:
     types = []
     if value is None:
         return [type(None), bool]
@@ -38,7 +40,7 @@ def get_allowed_types(value: str):
     return types
 
 
-def read_config(global_=False):
+def read_config(global_: Optional[bool] = False) -> configparser.ConfigParser:
     app_paths_list = []
     if isinstance(global_, bool):
         app_paths = get_app_paths(global_)
@@ -58,13 +60,13 @@ def read_config(global_=False):
     return config
 
 
-def save_config(config, global_=False):
+def save_config(config: configparser.ConfigParser, global_: Optional[bool] = False):
     app_paths = get_app_paths(global_)
     with open(app_paths.config_path, 'w+') as f:
         config.write(f)
 
 
-def get_config_value(key, global_=None):
+def get_config_value(key: str, global_: bool = None) -> Any:
     if key not in ALLOWED_CONFIG_KEYS.keys():
         raise RuntimeError('Wrong key.')
 

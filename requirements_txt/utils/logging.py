@@ -14,7 +14,7 @@ logger_handler.terminator = ""
 logger.addHandler(logger_handler)
 
 
-def set_verbose(verbose=False):
+def set_verbose(verbose: bool = False):
     if verbose:
         logger_handler.terminator = "\n"
     else:

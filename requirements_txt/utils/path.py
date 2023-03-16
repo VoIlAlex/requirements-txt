@@ -1,16 +1,18 @@
 import os
 import re
 import subprocess
+from typing import Optional, Tuple
+
 from requirements_txt.utils.crossplatform import get_destination_command
 
 
-def _execute_command(args):
+def _execute_command(args: list) -> str:
     pipe = subprocess.Popen(args, stdout=subprocess.PIPE)
     output = str(pipe.communicate()[0].decode()).replace('\n', '')
     return output
 
 
-def get_pip_path(pip_name=None):
+def get_pip_path(pip_name: Optional[str] = None) -> Tuple[Optional[str], Optional[str]]:
     command = get_destination_command()
     pips_to_try = [pip_name] if pip_name else ['pip', 'pip3']
     for pip_to_try in pips_to_try:
@@ -30,7 +32,7 @@ def get_pip_path(pip_name=None):
     return pip_path, python_name
 
 
-def get_python_path(python_name=None):
+def get_python_path(python_name: str = None) -> Optional[str]:
     command = get_destination_command()
     pythons_to_try = [python_name] if python_name else ['python3', 'python']
     for python_to_try in pythons_to_try:
@@ -44,7 +46,7 @@ def get_python_path(python_name=None):
             ...
 
 
-def find_virtualenv(path: str = None) -> str:
+def find_virtualenv(path: str = None) -> Optional[str]:
     path = path or os.getcwd()
     for file in os.listdir(path):
         if os.path.isdir(file):

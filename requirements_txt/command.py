@@ -25,7 +25,7 @@ def cli():
 @click.option('-g', '--global', 'global_', is_flag=True, help='Write to global configuration.')
 @click.argument('key', required=False)
 @click.argument('value', required=False)
-def config(key, value, global_):
+def config(key: str, value: str, global_: bool):
     """Allows to access to-requirements.txt config. Available keys:
 
 
@@ -75,14 +75,14 @@ def install():
 # Init
 @cli.command()
 @click.option('-v', '--verbose', is_flag=True, help='Show installation process logs.')
-def init(verbose):
+def init(verbose: bool):
     """Initialize virtualenv project."""
     init_virtual_env(verbose)
 
 
 @cli.command()
 @click.option('-v', '--verbose', is_flag=True, help='Show installation process logs.')
-def i(verbose):
+def i(verbose: bool):
     """Initialize virtualenv project. (alias)"""
     init_virtual_env(verbose)
 

@@ -7,7 +7,7 @@ from requirements_txt.utils.logging import logger, show_all_done_message, set_ve
 from requirements_txt.utils.path import get_pip_path, get_python_path, find_virtualenv
 
 
-def override_pip(pip_path, python_path):
+def override_pip(pip_path: str, python_path: str):
     new_pip_path = os.path.join(
         os.path.dirname(
             os.path.abspath(__file__)
@@ -22,7 +22,7 @@ def override_pip(pip_path, python_path):
             )
 
 
-def init_virtual_env(verbose=False):
+def init_virtual_env(verbose: bool = False):
     set_verbose(verbose)
     logger.info('Installing virtualenv...')
     venv_path = find_virtualenv()

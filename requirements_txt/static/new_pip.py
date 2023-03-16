@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import re
 import sys
+
 from pip._internal.cli.main import main
 from pip._internal.cli.main_parser import parse_command
 
@@ -9,9 +10,8 @@ requirements_handler = False
 try:
     from requirements_txt.update import (
         add_installed_packages_to_requirements_txt,
-        remove_uninstalled_packages_from_requirements_txt
-    )
-    from requirements_txt.config import get_config_value
+        remove_uninstalled_packages_from_requirements_txt)
+    from requirements_txt.utils.config import get_config_value
     requirements_handler = True
 except Exception:
     pass

@@ -1,8 +1,10 @@
-import os
-import click
 import configparser
+import os
 
-from requirements_txt.install import install as install_to_requirements_txt, init_virtual_env
+import click
+
+from requirements_txt.install import init_virtual_env
+from requirements_txt.install import install as install_to_requirements_txt
 from requirements_txt.show import show_requirements_txt
 
 if __name__ == '__main__':
@@ -10,8 +12,10 @@ if __name__ == '__main__':
     sys.path.append(os.getcwd())
 
 
-from requirements_txt.utils.appdata import get_app_paths, validate_app_data_decorator, validate_app_data
-from requirements_txt.config import get_allowed_types, ALLOWED_CONFIG_KEYS, read_config, save_config
+from requirements_txt.config import (ALLOWED_CONFIG_KEYS, get_allowed_types,
+                                     read_config, save_config)
+from requirements_txt.utils.appdata import (get_app_paths, validate_app_data,
+                                            validate_app_data_decorator)
 
 
 @click.group()

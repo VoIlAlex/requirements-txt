@@ -3,23 +3,10 @@ import subprocess
 import sys
 
 from requirements_txt.utils.check import is_pip_name
-from requirements_txt.utils.logging import logger, show_all_done_message, set_verbose
-from requirements_txt.utils.path import get_pip_path, get_python_path, find_virtualenv
-
-
-def override_pip(pip_path: str, python_path: str):
-    new_pip_path = os.path.join(
-        os.path.dirname(
-            os.path.abspath(__file__)
-        ),
-        'static',
-        'new_pip.py'
-    )
-    with open(pip_path, 'w+') as old_pip_file:
-        with open(new_pip_path) as new_pip_file:
-            old_pip_file.write(
-                new_pip_file.read().format(python_path=python_path)
-            )
+from requirements_txt.utils.logging import (logger, set_verbose,
+                                            show_all_done_message)
+from requirements_txt.utils.override import override_pip
+from requirements_txt.utils.path import find_virtualenv
 
 
 def init_virtual_env(verbose: bool = False):
@@ -55,20 +42,6 @@ def init_virtual_env(verbose: bool = False):
     install_for_venv()
     logger.info(' Done.\n')
     show_all_done_message()
-
-
-def install():
-    pip_paths = []
-    for pip in ['pip', 'pip3']:
-        pip_path, python_name = get_pip_path(pip)
-        if python_name is not None:
-            python_path = get_python_path(python_name)
-            if python_path:
-                pip_paths.append((pip_path, python_path))
-
-    for pip_path, python_path in pip_paths:
-        logger.info(f'Overriding "{pip_path}" with python "{python_path}"')
-        override_pip(pip_path, python_path)
 
 
 def install_for_venv():

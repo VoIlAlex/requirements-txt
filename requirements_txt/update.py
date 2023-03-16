@@ -3,9 +3,10 @@ import os
 from collections import OrderedDict
 from typing import Iterable
 
-from requirements_txt.config import get_config_value
 from pip._internal.commands.show import search_packages_info
 from pip._vendor.pkg_resources import _initialize_master_working_set
+
+from requirements_txt.utils.config import get_config_value
 
 
 def add_installed_packages_to_requirements_txt(args: Iterable):

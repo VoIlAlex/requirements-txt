@@ -56,8 +56,8 @@ setup(
 	],
 	entry_points={
 		'console_scripts': [
-			'requirements-txt-cli = requirements_txt.command:cli',
-			'rt-cli = requirements_txt.command:cli'
+			'requirements-txt-cli = requirements_txt.commands:cli',
+			'rt-cli = requirements_txt.commands:cli'
 		],
 	},
 	scripts=[

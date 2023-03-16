@@ -7,6 +7,8 @@ from pip._internal.cli.main import main
 from pip._internal.cli.main_parser import parse_command
 
 requirements_handler = False
+PIP_RT_VERSION = 2
+
 try:
     from requirements_txt.utils.pip import (
         add_installed_packages_to_requirements_txt,
@@ -14,7 +16,14 @@ try:
     from requirements_txt.utils.config import get_config_value
     requirements_handler = True
 except Exception:
-    pass
+    from requirements_txt import __version__
+    major_version = int(__version__.split(".")[0])
+    if major_version != PIP_RT_VERSION:
+        sys.stdout.write("Module to-requirements.txt major version does not match pip.py. ")
+        sys.stdout.write(f"(to-requirements.txt=={major_version}, pip.py=={PIP_RT_VERSION}) \n")
+        sys.stdout.write("To fix this issue and continue to use to-requirements.txt:\n")
+        sys.stdout.write(f"Option 1: pip install to-requirements.txt=={PIP_RT_VERSION}.*\n")
+        sys.stdout.write(f"Option 2: requirements-txt install")
 
 if __name__ == '__main__':
     command, args = parse_command(sys.argv[1:])

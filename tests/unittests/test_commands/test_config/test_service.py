@@ -58,8 +58,8 @@ class TestReadConfig:
         read_config(None)
         path_exists_mock.assert_called_with("path_global")
         get_app_paths_mock.assert_has_calls([
-            call(False),
-            call(True)
+            call(True),
+            call(False)
         ])
         config_read_mock.assert_called_once_with(
             ["path_local", "path_global"]

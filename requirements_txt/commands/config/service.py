@@ -1,8 +1,9 @@
-import configparser
-import os
-from typing import List, Optional
+from typing import List
 
-from requirements_txt.utils.appdata import get_app_paths
+import click
+from appdata import AppDataPaths
+
+from requirements_txt.utils.config import ALLOWED_CONFIG_KEYS, read_config, save_config
 
 
 def get_allowed_types(value: str) -> List[type]:
@@ -24,27 +25,23 @@ def get_allowed_types(value: str) -> List[type]:
     return types
 
 
-def read_config(global_: Optional[bool] = False) -> configparser.ConfigParser:
-    app_paths_list = []
-    if isinstance(global_, bool):
-        app_paths = get_app_paths(global_)
-        app_paths_list.append(app_paths)
-    else:
-        app_paths_list.append(
-            get_app_paths(False)
-        )
-        app_paths = get_app_paths(True)
-        if os.path.exists(app_paths.config_path):
-            app_paths_list.append(
-                app_paths
-            )
+def set_config(app_paths: AppDataPaths, key: str, value: str, global_: bool):
+    if key not in ALLOWED_CONFIG_KEYS.keys():
+        click.echo('Wrong config key.')
+        raise click.Abort()
+    key_data = ALLOWED_CONFIG_KEYS[key]
 
-    config = configparser.ConfigParser()
-    config.read([x.config_path for x in app_paths_list])
-    return config
+    if key_data['type'] is bool and value is None:
+        value = '1'
 
+    if key_data['type'] not in get_allowed_types(value):
+        click.echo('Wrong type of value.')
+        raise click.Abort()
 
-def save_config(config: configparser.ConfigParser, global_: Optional[bool] = False):
-    app_paths = get_app_paths(global_)
-    with open(app_paths.config_path, 'w+') as f:
-        config.write(f)
+    lock = app_paths.lock()
+    with lock.context():
+        config = read_config(global_)
+        if 'DEFAULT' not in config:
+            config['DEFAULT'] = {}
+        config['DEFAULT'][key] = value
+        save_config(config, global_=global_)

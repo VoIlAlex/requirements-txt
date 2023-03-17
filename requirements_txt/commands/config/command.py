@@ -3,10 +3,8 @@ import configparser
 import click
 
 from requirements_txt.commands.cli import cli
-from requirements_txt.commands.config.service import (get_allowed_types,
-                                                      read_config, save_config)
+from requirements_txt.commands.config.service import set_config
 from requirements_txt.utils.appdata import get_app_paths, validate_app_data
-from requirements_txt.utils.config import ALLOWED_CONFIG_KEYS
 
 
 # Config
@@ -37,25 +35,7 @@ def config(key: str, value: str, global_: bool):
             print('\n')
         return
 
-    if key not in ALLOWED_CONFIG_KEYS.keys():
-        click.echo('Wrong config key.')
-        raise click.Abort()
-    key_data = ALLOWED_CONFIG_KEYS[key]
-
-    if key_data['type'] is bool and value is None:
-        value = '1'
-
-    if key_data['type'] not in get_allowed_types(value):
-        click.echo('Wrong type of value.')
-        raise click.Abort()
-
-    lock = app_paths.lock()
-    with lock.context():
-        config = read_config(global_)
-        if 'DEFAULT' not in config:
-            config['DEFAULT'] = {}
-        config['DEFAULT'][key] = value
-        save_config(config, global_=global_)
+    set_config(app_paths, key, value, global_)
 
 
 __all__ = [

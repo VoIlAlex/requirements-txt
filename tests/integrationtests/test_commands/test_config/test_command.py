@@ -1,4 +1,7 @@
 import os
+from types import SimpleNamespace
+from unittest.mock import patch, Mock
+
 from click.testing import CliRunner
 from requirements_txt.commands import cli
 
@@ -183,3 +186,33 @@ class TestCommandConfig:
             with open(config_path) as f:
                 data = f.read()
                 assert data == ""
+
+    def test_command_config_global_1(self):
+        runner = CliRunner()
+        with runner.isolated_filesystem():
+            with patch("appdata.utils.Path.home") as home_mock:
+                global_path = os.path.join(
+                    os.getcwd(),
+                    "test-global-path"
+                )
+                os.makedirs(global_path)
+                home_mock.return_value = SimpleNamespace(
+                    absolute=Mock(return_value=global_path)
+                )
+
+                result = runner.invoke(cli, ["config", "--global", "disable", "1"])
+                assert result.exit_code == 0
+
+                config_path = os.path.join(
+                    global_path,
+                    ".to-requirements.txt",
+                    "default.ini"
+                )
+                with open(config_path) as f:
+                    data = f.read()
+                    assert data == "[DEFAULT]\ndisable = 1\n\n"
+
+
+
+
+

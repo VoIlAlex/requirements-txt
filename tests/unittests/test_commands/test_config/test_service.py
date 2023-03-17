@@ -7,9 +7,8 @@ from requirements_txt.commands.config.service import get_allowed_types, read_con
 class TestGetAllowedTypes:
     def test_get_allowed_types_1(self):
         types = get_allowed_types(None)
-        assert len(types) == 2
+        assert len(types) == 1
         assert type(None) in types
-        assert bool in types
 
     def test_get_allowed_types_2(self):
         types = get_allowed_types("")

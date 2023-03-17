@@ -8,7 +8,7 @@ from requirements_txt.utils.appdata import get_app_paths
 def get_allowed_types(value: str) -> List[type]:
     types = []
     if value is None:
-        return [type(None), bool]
+        return [type(None)]
     types.append(str)
     if value.isdigit():
         types.append(int)

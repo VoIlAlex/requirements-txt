@@ -1,9 +1,9 @@
-import sys
 import logging
-from colored import fg, attr
+import sys
+
+from colored import attr, fg
 
 from requirements_txt.utils.consts import ALL_DONE
-
 
 logger = logging.getLogger('requirements-txt')
 logger.setLevel(logging.INFO)
@@ -14,7 +14,7 @@ logger_handler.terminator = ""
 logger.addHandler(logger_handler)
 
 
-def set_verbose(verbose=False):
+def set_verbose(verbose: bool = False):
     if verbose:
         logger_handler.terminator = "\n"
     else:
@@ -36,5 +36,7 @@ def show_all_done_message():
 
 
 __all__ = [
-    'logger'
+    "logger",
+    "set_verbose",
+    "show_all_done_message",
 ]

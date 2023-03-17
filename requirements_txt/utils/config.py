@@ -1,0 +1,63 @@
+import configparser
+import os
+from typing import Any, Optional
+
+from requirements_txt.utils.appdata import get_app_paths
+
+
+ALLOWED_CONFIG_KEYS = {
+    'only_git': {
+        'type': bool,
+        'default': False
+    },
+    'allow_create': {
+        'type': bool,
+        'default': False
+    },
+    'disable': {
+        'type': bool,
+        'default': False
+    }
+}
+
+
+def get_config_value(key: str, global_: bool = None) -> Any:
+    if key not in ALLOWED_CONFIG_KEYS.keys():
+        raise RuntimeError('Wrong key.')
+
+    config = read_config(global_=global_)
+    value = config['DEFAULT'].get(key, ALLOWED_CONFIG_KEYS[key].get('default', None))
+    if value is not None:
+        type_ = ALLOWED_CONFIG_KEYS[key].get('type', str)
+        if type_ is bool:
+            return True if value == '1' else False
+        elif type_ is float:
+            return float(value)
+        else:
+            return value
+
+
+def read_config(global_: Optional[bool] = False) -> configparser.ConfigParser:
+    app_paths_list = []
+    if isinstance(global_, bool):
+        app_paths = get_app_paths(global_)
+        app_paths_list.append(app_paths)
+    else:
+        app_paths = get_app_paths(True)
+        if os.path.exists(app_paths.config_path):
+            app_paths_list.append(
+                app_paths
+            )
+        app_paths_list.append(
+            get_app_paths(False)
+        )
+
+    config = configparser.ConfigParser()
+    config.read([x.config_path for x in app_paths_list])
+    return config
+
+
+def save_config(config: configparser.ConfigParser, global_: Optional[bool] = False):
+    app_paths = get_app_paths(global_)
+    with open(app_paths.config_path, 'w+') as f:
+        config.write(f)

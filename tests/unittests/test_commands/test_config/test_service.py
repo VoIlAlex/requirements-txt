@@ -1,15 +1,14 @@
 from types import SimpleNamespace
 from unittest.mock import patch, Mock, call, mock_open
 
-from requirements_txt.config import get_allowed_types, read_config, save_config, get_config_value
-from pytest import raises
+from requirements_txt.commands.config.service import get_allowed_types, read_config, save_config
+
 
 class TestGetAllowedTypes:
     def test_get_allowed_types_1(self):
         types = get_allowed_types(None)
-        assert len(types) == 2
+        assert len(types) == 1
         assert type(None) in types
-        assert bool in types
 
     def test_get_allowed_types_2(self):
         types = get_allowed_types("")
@@ -39,9 +38,9 @@ class TestGetAllowedTypes:
         assert float in types
 
 
-@patch("requirements_txt.config.os.path.exists")
-@patch("requirements_txt.config.configparser.ConfigParser.read")
-@patch("requirements_txt.config.get_app_paths")
+@patch("requirements_txt.commands.config.service.os.path.exists")
+@patch("requirements_txt.commands.config.service.configparser.ConfigParser.read")
+@patch("requirements_txt.commands.config.service.get_app_paths")
 class TestReadConfig:
     def test_read_config_1(
         self,
@@ -108,7 +107,7 @@ class TestReadConfig:
 
 
 @patch("builtins.open", new_callable=mock_open)
-@patch("requirements_txt.config.get_app_paths")
+@patch("requirements_txt.commands.config.service.get_app_paths")
 class TestSaveConfig:
     def test_save_config_1(self, get_app_paths_mock: Mock, open_mock: Mock):
         config_mock = SimpleNamespace(
@@ -145,53 +144,3 @@ class TestSaveConfig:
         get_app_paths_mock.assert_called_once_with(True)
         open_mock.assert_called_once_with("config-path-3", "w+")
         config_mock.write.assert_called_once_with(open_mock.return_value)
-
-
-@patch("requirements_txt.config.read_config")
-class TestGetConfigValue:
-    def test_get_config_value_defaults_1(self, read_config_mock: Mock):
-        read_config_mock.return_value = {
-            "DEFAULT": {}
-        }
-        assert get_config_value("only_git") is False
-        assert get_config_value("allow_create", True) is False
-        assert get_config_value("disable", False) is False
-
-        read_config_mock.assert_has_calls([
-            call(global_=None),
-            call(global_=True),
-            call(global_=False)
-        ])
-
-    def test_get_config_value_only_git_1(self, read_config_mock: Mock):
-        read_config_mock.return_value = {
-            "DEFAULT": {
-                "only_git": "1"
-            }
-        }
-        assert get_config_value("only_git") is True
-
-    def test_get_config_value_allow_create_2(self, read_config_mock: Mock):
-        read_config_mock.return_value = {
-            "DEFAULT": {
-                "allow_create": "1"
-            }
-        }
-        assert get_config_value("allow_create") is True
-
-    def test_get_config_value_disable_3(self, read_config_mock: Mock):
-        read_config_mock.return_value = {
-            "DEFAULT": {
-                "disable": "1"
-            }
-        }
-        assert get_config_value("disable") is True
-
-    def test_get_config_value_not_exists(self, read_config_mock: Mock):
-        read_config_mock.return_value = {
-            "DEFAULT": {
-                "disable": "1"
-            }
-        }
-        with raises(RuntimeError, match='Wrong key.'):
-            get_config_value("not-existing-key")

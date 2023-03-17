@@ -1,9 +1,11 @@
-from functools import wraps
 import os
+from functools import wraps
+from typing import Callable
+
 from appdata import AppDataPaths
 
 
-def validate_app_data_decorator(func):
+def validate_app_data_decorator(func: Callable) -> Callable:
     @wraps(func)
     def _func(*args, **kwargs):
         app_paths = AppDataPaths('to-requirements.txt')
@@ -13,13 +15,13 @@ def validate_app_data_decorator(func):
     return _func
 
 
-def validate_app_data(global_=False):
+def validate_app_data(global_: bool = False):
     app_paths = get_app_paths(global_)
     if app_paths.require_setup:
         app_paths.setup()
 
 
-def insert_app_paths(func):
+def insert_app_paths(func: Callable) -> Callable:
     @wraps(func)
     def _func(*args, **kwargs):
         app_paths = AppDataPaths('to-requirements.txt')
@@ -27,7 +29,7 @@ def insert_app_paths(func):
     return _func
 
 
-def get_app_paths(global_=False):
+def get_app_paths(global_: bool = False) -> AppDataPaths:
     if global_:
         app_paths = AppDataPaths('to-requirements.txt')
     else:

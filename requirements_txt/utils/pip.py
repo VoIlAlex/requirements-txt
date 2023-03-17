@@ -1,13 +1,15 @@
 import logging
 import os
 from collections import OrderedDict
+from typing import Iterable
 
-from requirements_txt.config import get_config_value
 from pip._internal.commands.show import search_packages_info
 from pip._vendor.pkg_resources import _initialize_master_working_set
 
+from requirements_txt.utils.config import get_config_value
 
-def add_installed_packages_to_requirements_txt(args):
+
+def add_installed_packages_to_requirements_txt(args: Iterable):
     packages_names = [x.split('==')[0] for x in args if not x.startswith('-') and x != '.']
     _initialize_master_working_set()
 
@@ -66,7 +68,7 @@ def add_installed_packages_to_requirements_txt(args):
         f.writelines([f'{package_name}=={package_version}\n' for package_name, package_version in requirements_dict.items()])
 
 
-def remove_uninstalled_packages_from_requirements_txt(args):
+def remove_uninstalled_packages_from_requirements_txt(args: Iterable):
     packages_names = set([x.split('==')[0].strip() for x in args if not x.startswith('-')])
     _initialize_master_working_set()
 

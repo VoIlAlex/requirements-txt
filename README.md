@@ -5,7 +5,7 @@
 [![Documentation](https://img.shields.io/readthedocs/requirements-txt)](https://requirements-txt.readthedocs.io/en/latest/)
 
 
-[![Maintainability](https://img.shields.io/maintenance/yes/2022)](https://img.shields.io/maintenance/yes/2022)
+[![Maintainability](https://img.shields.io/maintenance/yes/2023)](https://img.shields.io/maintenance/yes/2023)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License](https://img.shields.io/github/license/VoIlAlex/requirements-txt)](https://github.com/VoIlAlex/requirements-txt/blob/master/LICENSE.md)
 

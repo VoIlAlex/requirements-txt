@@ -4,7 +4,9 @@ import os.path
 def override_pip(pip_path: str, python_path: str):
     new_pip_path = os.path.join(
         os.path.dirname(
-            os.path.abspath(__file__)
+            os.path.dirname(
+                os.path.abspath(__file__)
+            ),
         ),
         'static',
         'new_pip.py'

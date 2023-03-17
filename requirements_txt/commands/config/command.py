@@ -39,12 +39,15 @@ def config(key: str, value: str, global_: bool):
 
     if key not in ALLOWED_CONFIG_KEYS.keys():
         click.echo('Wrong config key.')
-        return
+        raise click.Abort()
     key_data = ALLOWED_CONFIG_KEYS[key]
-    if key_data['type'] not in get_allowed_types(value):
-        click.echo('Wrong type of value.')
+
     if key_data['type'] is bool and value is None:
         value = '1'
+
+    if key_data['type'] not in get_allowed_types(value):
+        click.echo('Wrong type of value.')
+        raise click.Abort()
 
     lock = app_paths.lock()
     with lock.context():

@@ -51,7 +51,7 @@ def config(key: str, value: str, global_: bool):
 
     lock = app_paths.lock()
     with lock.context():
-        config = read_config()
+        config = read_config(global_)
         if 'DEFAULT' not in config:
             config['DEFAULT'] = {}
         config['DEFAULT'][key] = value

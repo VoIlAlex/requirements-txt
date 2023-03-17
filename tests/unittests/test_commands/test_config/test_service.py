@@ -40,7 +40,7 @@ class TestGetAllowedTypes:
 
 @patch("requirements_txt.commands.config.service.os.path.exists")
 @patch("requirements_txt.commands.config.service.configparser.ConfigParser.read")
-@patch("requirements_txt.commands.config.service.get_app_paths")
+@patch("requirements_txt.utils.config.get_app_paths")
 class TestReadConfig:
     def test_read_config_1(
         self,
@@ -107,7 +107,7 @@ class TestReadConfig:
 
 
 @patch("builtins.open", new_callable=mock_open)
-@patch("requirements_txt.commands.config.service.get_app_paths")
+@patch("requirements_txt.utils.config.service.get_app_paths")
 class TestSaveConfig:
     def test_save_config_1(self, get_app_paths_mock: Mock, open_mock: Mock):
         config_mock = SimpleNamespace(

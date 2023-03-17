@@ -38,7 +38,7 @@ class TestGetAllowedTypes:
         assert float in types
 
 
-@patch("requirements_txt.commands.config.service.os.path.exists")
+@patch("requirements_txt.utils.config.os.path.exists")
 @patch("requirements_txt.utils.config.configparser.ConfigParser.read")
 @patch("requirements_txt.utils.config.get_app_paths")
 class TestReadConfig:

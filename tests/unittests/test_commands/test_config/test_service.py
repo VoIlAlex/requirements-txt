@@ -38,9 +38,9 @@ class TestGetAllowedTypes:
         assert float in types
 
 
-@patch("requirements_txt.commands.config.service.os.path.exists")
-@patch("requirements_txt.commands.config.service.configparser.ConfigParser.read")
-@patch("requirements_txt.commands.config.service.get_app_paths")
+@patch("requirements_txt.utils.config.os.path.exists")
+@patch("requirements_txt.utils.config.configparser.ConfigParser.read")
+@patch("requirements_txt.utils.config.get_app_paths")
 class TestReadConfig:
     def test_read_config_1(
         self,
@@ -58,8 +58,8 @@ class TestReadConfig:
         read_config(None)
         path_exists_mock.assert_called_with("path_global")
         get_app_paths_mock.assert_has_calls([
-            call(False),
-            call(True)
+            call(True),
+            call(False)
         ])
         config_read_mock.assert_called_once_with(
             ["path_local", "path_global"]
@@ -107,7 +107,7 @@ class TestReadConfig:
 
 
 @patch("builtins.open", new_callable=mock_open)
-@patch("requirements_txt.commands.config.service.get_app_paths")
+@patch("requirements_txt.utils.config.get_app_paths")
 class TestSaveConfig:
     def test_save_config_1(self, get_app_paths_mock: Mock, open_mock: Mock):
         config_mock = SimpleNamespace(

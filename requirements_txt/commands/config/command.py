@@ -55,7 +55,7 @@ def config(key: str, value: str, global_: bool):
         if 'DEFAULT' not in config:
             config['DEFAULT'] = {}
         config['DEFAULT'][key] = value
-        save_config(config)
+        save_config(config, global_=global_)
 
 
 __all__ = [

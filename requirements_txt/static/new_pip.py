@@ -20,10 +20,10 @@ except Exception:
     major_version = int(__version__.split(".")[0])
     if major_version != PIP_RT_VERSION:
         sys.stdout.write("Module to-requirements.txt major version does not match pip.py. ")
-        sys.stdout.write(f"(to-requirements.txt==%s, pip.py==%s) \n" % (str(major_version), str(PIP_RT_VERSION)))
+        sys.stdout.write("(to-requirements.txt==%s, pip.py==%s) \n" % (str(major_version), str(PIP_RT_VERSION)))
         sys.stdout.write("To fix this issue and continue to use to-requirements.txt:\n")
-        sys.stdout.write(f"Option 1: pip install to-requirements.txt==$s.*\n" % PIP_RT_VERSION)
-        sys.stdout.write(f"Option 2: requirements-txt install")
+        sys.stdout.write("Option 1: pip install to-requirements.txt==$s.*\n" % PIP_RT_VERSION)
+        sys.stdout.write("Option 2: requirements-txt install")
 
 if __name__ == '__main__':
     command, args = parse_command(sys.argv[1:])

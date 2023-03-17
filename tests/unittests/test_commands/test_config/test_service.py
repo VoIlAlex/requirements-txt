@@ -62,7 +62,7 @@ class TestReadConfig:
             call(False)
         ])
         config_read_mock.assert_called_once_with(
-            ["path_local", "path_global"]
+            ["path_global", "path_local"]
         )
 
     def test_read_config_2(

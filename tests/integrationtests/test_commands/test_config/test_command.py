@@ -196,7 +196,7 @@ class TestCommandConfig:
             )
             os.makedirs(global_path)
             with patch("requirements_txt.commands.config.command.get_app_paths") as get_app_paths_1_mock:
-                with patch("requirements_txt.commands.config.service.get_app_paths") as get_app_paths_2_mock:
+                with patch("requirements_txt.utils.config.get_app_paths") as get_app_paths_2_mock:
                     with patch("requirements_txt.utils.appdata.get_app_paths") as get_app_paths_3_mock:
                         def new_get_app_paths(global_):
                             if global_:

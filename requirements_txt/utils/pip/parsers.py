@@ -1,7 +1,8 @@
+import logging
 from collections import OrderedDict
 from typing import Iterable, List, Dict, Union
 
-from pip._internal.commands.show import search_packages_info, _PackageInfo
+from pip._internal.commands.show import search_packages_info, _PackageInfo, logger as pip_logger
 from pip._vendor.pkg_resources import _initialize_master_working_set
 
 
@@ -39,10 +40,14 @@ def get_packages_info(packages_names: List[str]) -> Dict[str, str]:
     :return: mapping of package names to package versions.
     """
     _initialize_master_working_set()
-    return {
+    initial_pip_logger_level = pip_logger.level
+    pip_logger.setLevel(level=logging.CRITICAL)
+    data = {
         get_package_name(package_info): get_package_version(package_info)
         for package_info in search_packages_info(packages_names)
     }
+    pip_logger.setLevel(level=initial_pip_logger_level)
+    return data
 
 
 def parse_packages_names(args: Iterable) -> List[str]:

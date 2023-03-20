@@ -12,6 +12,7 @@ def validate_app_data_decorator(func: Callable) -> Callable:
     :param func: function to decorate.
     :return: decorated function.
     """
+
     @wraps(func)
     def _func(*args, **kwargs):
         app_paths = AppDataPaths("to-requirements.txt")
@@ -40,6 +41,7 @@ def insert_app_paths(func: Callable) -> Callable:
     :param func: function to decorate.
     :return: decorated function.
     """
+
     @wraps(func)
     def _func(*args, **kwargs):
         app_paths = AppDataPaths("to-requirements.txt")

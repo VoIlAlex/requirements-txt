@@ -22,13 +22,13 @@ def add_installed_packages_to_requirements_txt(args: Iterable):
     packages = get_packages_info(packages_names)
 
     if not check_git_only_restriction():
-        logging.error("Cannot write to requirements.txt. git_only flag is set.")
+        logging.warning("Cannot write to requirements.txt. git_only flag is set.")
         return
 
     requirements_txt_path, created = get_requirements_txt_path()
 
     if requirements_txt_path is None and not created:
-        logging.error(
+        logging.warning(
             "requirements.txt not found. Specify allow_create "
             "config key if you want it to create automatically."
         )
@@ -61,13 +61,13 @@ def remove_uninstalled_packages_from_requirements_txt(args: Iterable):
     packages = get_packages_info(packages_names)
 
     if not check_git_only_restriction():
-        logging.error("Cannot write to requirements.txt. git_only flag is set.")
+        logging.warning("Cannot write to requirements.txt. git_only flag is set.")
         return
 
     requirements_txt_path, _ = get_requirements_txt_path(try_create=False)
 
     if requirements_txt_path is None:
-        logging.error("requirements.txt not found")
+        logging.warning("requirements.txt not found")
         return
 
     requirements_dict = parse_requirements_txt(requirements_txt_path)

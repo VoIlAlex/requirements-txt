@@ -19,9 +19,11 @@ bin/
 build/
 target/
 dist/
+.coverage
 
 # ======
 # Others
 # ======
 *.log
 .to-requirements.txt
+.codel

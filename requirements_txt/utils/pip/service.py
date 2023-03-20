@@ -27,7 +27,7 @@ def add_installed_packages_to_requirements_txt(args: Iterable):
     if not created:
         requirements_dict = parse_requirements_txt(requirements_txt_path)
 
-    for package_name, package_version in packages:
+    for package_name, package_version in packages.items():
         requirements_dict[package_name] = package_version
 
     with open(requirements_txt_path, 'w+') as f:

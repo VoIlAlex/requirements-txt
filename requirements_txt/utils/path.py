@@ -55,8 +55,8 @@ def find_virtualenv(path: str = None) -> Optional[str]:
             files_in_dir = os.listdir(file)
             if (
                 "bin" in files_in_dir
-                and "lib" in files_in_dir
-                and "pyvenv.cfg" in files_in_dir
+                and "lib" in files_in_dir  # noqa: W503
+                and "pyvenv.cfg" in files_in_dir  # noqa: W503
             ):
                 return os.path.join(path, file)
 

@@ -7,3 +7,8 @@ def get_destination_command() -> str:
     else:
         command = 'which'
     return command
+
+
+__all__ = [
+    "get_destination_command",
+]

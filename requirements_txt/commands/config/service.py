@@ -24,3 +24,8 @@ def set_config(app_paths: AppDataPaths, key: str, value: str, global_: bool):
             config['DEFAULT'] = {}
         config['DEFAULT'][key] = value
         save_config(config, global_=global_)
+
+
+__all__ = [
+    "set_config",
+]

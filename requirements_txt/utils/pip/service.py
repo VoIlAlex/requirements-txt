@@ -65,5 +65,5 @@ def remove_uninstalled_packages_from_requirements_txt(args: Iterable):
 
 __all__ = [
     "add_installed_packages_to_requirements_txt",
-    "remove_uninstalled_packages_from_requirements_txt"
+    "remove_uninstalled_packages_from_requirements_txt",
 ]

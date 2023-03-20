@@ -16,3 +16,8 @@ def override_pip(pip_path: str, python_path: str):
             old_pip_file.write(
                 new_pip_file.read().format(python_path=python_path)
             )
+
+
+__all__ = [
+    "override_pip",
+]

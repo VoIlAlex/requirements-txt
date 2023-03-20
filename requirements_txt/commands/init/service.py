@@ -62,3 +62,9 @@ def install_for_venv():
             pip_script_path,
             os.path.join(bin_venv_dir, 'python')
         )
+
+
+__all__ = [
+    "init_virtual_env",
+    "install_for_venv",
+]

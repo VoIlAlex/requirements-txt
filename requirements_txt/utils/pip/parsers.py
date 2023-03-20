@@ -47,3 +47,10 @@ def parse_requirements_txt(path: str):
                 requirement_split[1].replace('\n', '')
                 requirements_dict[requirement_split[0]] = requirement_split[1]
     return requirements_dict
+
+
+__all__ = [
+    "get_packages_info",
+    "parse_packages_names",
+    "parse_requirements_txt",
+]

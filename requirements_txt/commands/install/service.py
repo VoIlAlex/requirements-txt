@@ -15,3 +15,8 @@ def install():
     for pip_path, python_path in pip_paths:
         logger.info(f'Overriding "{pip_path}" with python "{python_path}"')
         override_pip(pip_path, python_path)
+
+
+__all__ = [
+    "install",
+]

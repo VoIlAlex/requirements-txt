@@ -80,3 +80,12 @@ def save_config(config: configparser.ConfigParser, global_: Optional[bool] = Fal
     app_paths = get_app_paths(global_)
     with open(app_paths.config_path, 'w+') as f:
         config.write(f)
+
+
+__all__ = [
+    "ALLOWED_CONFIG_KEYS",
+    "get_app_paths",
+    "get_config_value",
+    "read_config",
+    "save_config",
+]

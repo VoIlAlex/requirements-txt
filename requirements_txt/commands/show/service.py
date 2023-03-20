@@ -9,3 +9,8 @@ def show_requirements_txt():
     with open(requirement_text_path) as f:
         requirements_txt_content = f.read()
     print(requirements_txt_content)
+
+
+__all__ = [
+    "show_requirements_txt",
+]

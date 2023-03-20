@@ -2,7 +2,11 @@ import logging
 from collections import OrderedDict
 from typing import Iterable, List, Dict, Union
 
-from pip._internal.commands.show import search_packages_info, _PackageInfo, logger as pip_logger
+from pip._internal.commands.show import (
+    search_packages_info,
+    _PackageInfo,
+    logger as pip_logger,
+)
 from pip._vendor.pkg_resources import _initialize_master_working_set
 
 

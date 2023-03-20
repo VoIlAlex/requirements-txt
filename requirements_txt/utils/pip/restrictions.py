@@ -27,7 +27,7 @@ def get_requirements_txt_path(try_create: bool = False) -> Tuple[Optional[str], 
         if try_create:
             allow_create = get_config_value('allow_create')
             if allow_create:
-                with open(requirements_txt_path, 'w+') as f:
+                with open(requirements_txt_path, 'w+'):
                     created = True
             else:
                 created = False

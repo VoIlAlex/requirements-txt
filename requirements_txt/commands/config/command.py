@@ -9,9 +9,11 @@ from requirements_txt.utils.appdata import get_app_paths, validate_app_data
 
 # Config
 @cli.command()
-@click.option('-g', '--global', 'global_', is_flag=True, help='Write to global configuration.')
-@click.argument('key', required=False)
-@click.argument('value', required=False)
+@click.option(
+    "-g", "--global", "global_", is_flag=True, help="Write to global configuration."
+)
+@click.argument("key", required=False)
+@click.argument("value", required=False)
 def config(key: str, value: str, global_: bool):
     """Allows to access to-requirements.txt config. Available keys:
 
@@ -29,10 +31,10 @@ def config(key: str, value: str, global_: bool):
         config = configparser.ConfigParser()
         config.read(app_paths.config_path)
         for section in config:
-            print(f'[{section}]')
+            print(f"[{section}]")
             for key, value in config[section].items():
-                print(f'{key}={value}')
-            print('\n')
+                print(f"{key}={value}")
+            print("\n")
         return
 
     set_config(app_paths, key, value, global_)

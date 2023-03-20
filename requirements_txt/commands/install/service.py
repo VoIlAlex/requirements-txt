@@ -5,7 +5,7 @@ from requirements_txt.utils.path import get_pip_path, get_python_path
 
 def install():
     pip_paths = []
-    for pip in ['pip', 'pip3']:
+    for pip in ["pip", "pip3"]:
         pip_path, python_name = get_pip_path(pip)
         if python_name is not None:
             python_path = get_python_path(python_name)
@@ -15,3 +15,8 @@ def install():
     for pip_path, python_path in pip_paths:
         logger.info(f'Overriding "{pip_path}" with python "{python_path}"')
         override_pip(pip_path, python_path)
+
+
+__all__ = [
+    "install",
+]

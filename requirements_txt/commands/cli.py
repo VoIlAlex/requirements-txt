@@ -7,3 +7,8 @@ from requirements_txt.utils.appdata import validate_app_data_decorator
 @validate_app_data_decorator
 def cli():
     ...
+
+
+__all__ = [
+    "cli",
+]

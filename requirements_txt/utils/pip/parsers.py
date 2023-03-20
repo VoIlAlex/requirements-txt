@@ -19,7 +19,7 @@ def get_package_version(package_info):
         return package_info.version
 
 
-def get_packages_info(packages_names: List[str]) -> Dict[str: str]:
+def get_packages_info(packages_names: List[str]) -> Dict[str, str]:
     _initialize_master_working_set()
     return {
         get_package_name(package_info): get_package_version(package_info)

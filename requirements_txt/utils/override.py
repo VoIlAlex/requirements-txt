@@ -2,6 +2,12 @@ import os.path
 
 
 def override_pip(pip_path: str, python_path: str):
+    """
+    Override the pip script with one presented by to-requirements.txt.
+
+    :param pip_path: path to pip script to override.
+    :param python_path: path to python to set as executive for pip script.
+    """
     new_pip_path = os.path.join(
         os.path.dirname(
             os.path.dirname(os.path.abspath(__file__)),

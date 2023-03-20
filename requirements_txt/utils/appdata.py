@@ -6,6 +6,12 @@ from appdata import AppDataPaths
 
 
 def validate_app_data_decorator(func: Callable) -> Callable:
+    """
+    Setup to-requirements.txt data paths on function call.
+
+    :param func: function to decorate.
+    :return: decorated function.
+    """
     @wraps(func)
     def _func(*args, **kwargs):
         app_paths = AppDataPaths("to-requirements.txt")
@@ -17,12 +23,23 @@ def validate_app_data_decorator(func: Callable) -> Callable:
 
 
 def validate_app_data(global_: bool = False):
+    """
+    Setup to-requirements.txt data paths if not done.
+
+    :param global_: whether to setup global data paths.
+    """
     app_paths = get_app_paths(global_)
     if app_paths.require_setup:
         app_paths.setup()
 
 
 def insert_app_paths(func: Callable) -> Callable:
+    """
+    Insert app paths as an argument to function.
+
+    :param func: function to decorate.
+    :return: decorated function.
+    """
     @wraps(func)
     def _func(*args, **kwargs):
         app_paths = AppDataPaths("to-requirements.txt")
@@ -32,6 +49,12 @@ def insert_app_paths(func: Callable) -> Callable:
 
 
 def get_app_paths(global_: bool = False) -> AppDataPaths:
+    """
+    Get app paths.
+
+    :param global_: whether to get global or local paths.
+    :return: app paths object.
+    """
     if global_:
         app_paths = AppDataPaths("to-requirements.txt")
     else:

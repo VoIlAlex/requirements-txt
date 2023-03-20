@@ -17,6 +17,10 @@ logger.addHandler(logger_handler)
 
 
 def set_verbose(verbose: bool = False):
+    """
+    Set verbosity of logger.
+    :param verbose: whether logger is verbose.
+    """
     if verbose:
         logger_handler.terminator = "\n"
     else:
@@ -24,6 +28,9 @@ def set_verbose(verbose: bool = False):
 
 
 def show_all_done_message():
+    """
+    Print ALL_DONE message to the screen.
+    """
     message = ALL_DONE
     final_message = ""
     for line in message.split("\n"):

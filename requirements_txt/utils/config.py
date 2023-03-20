@@ -13,6 +13,12 @@ ALLOWED_CONFIG_KEYS = {
 
 
 def get_allowed_types(value: str) -> List[type]:
+    """
+    Get allowed types for presented string value.
+
+    :param value: value to check.
+    :return: list of types that the value could be converted to.
+    """
     types = []
     if value is None:
         return [type(None)]
@@ -32,6 +38,12 @@ def get_allowed_types(value: str) -> List[type]:
 
 
 def get_config_value(key: str, global_: bool = None) -> Any:
+    """
+    Get value from config.
+
+    :param key: config key to get.
+    :param global_: whether to search in global config. Search in both global and local if None.
+    """
     if key not in ALLOWED_CONFIG_KEYS.keys():
         raise RuntimeError("Wrong key.")
 
@@ -48,6 +60,11 @@ def get_config_value(key: str, global_: bool = None) -> Any:
 
 
 def read_config(global_: Optional[bool] = False) -> configparser.ConfigParser:
+    """
+    Read config.
+
+    :param global_: whether to read global config. Read both global and local if None.
+    """
     app_paths_list = []
     if isinstance(global_, bool):
         app_paths = get_app_paths(global_)
@@ -64,6 +81,12 @@ def read_config(global_: Optional[bool] = False) -> configparser.ConfigParser:
 
 
 def save_config(config: configparser.ConfigParser, global_: Optional[bool] = False):
+    """
+    Save config.
+
+    :param config: config to save.
+    :param global_: whether to save config as global or local.
+    """
     app_paths = get_app_paths(global_)
     with open(app_paths.config_path, "w+") as f:
         config.write(f)

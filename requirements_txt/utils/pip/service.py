@@ -13,6 +13,11 @@ from requirements_txt.utils.pip.restrictions import (
 
 
 def add_installed_packages_to_requirements_txt(args: Iterable):
+    """
+    Add installed packages to requirements.txt or update their versions.
+
+    :param args: arguments of `pip install`.
+    """
     packages_names = parse_packages_names(args)
     packages = get_packages_info(packages_names)
 
@@ -47,6 +52,11 @@ def add_installed_packages_to_requirements_txt(args: Iterable):
 
 
 def remove_uninstalled_packages_from_requirements_txt(args: Iterable):
+    """
+    Remove uninstalled package from requirements.txt.
+
+    :param args: arguments of `pip install`.
+    """
     packages_names = parse_packages_names(args)
     packages = get_packages_info(packages_names)
 

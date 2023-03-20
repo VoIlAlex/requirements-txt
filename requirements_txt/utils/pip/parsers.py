@@ -1,18 +1,30 @@
 from collections import OrderedDict
-from typing import Iterable, List, Dict
+from typing import Iterable, List, Dict, Union
 
-from pip._internal.commands.show import search_packages_info
+from pip._internal.commands.show import search_packages_info, _PackageInfo
 from pip._vendor.pkg_resources import _initialize_master_working_set
 
 
-def get_package_name(package_info):
+def get_package_name(package_info: Union[dict, _PackageInfo]) -> str:
+    """
+    Get package name for package info.
+
+    :param package_info: package info to get package name from.
+    :return: package name.
+    """
     if isinstance(package_info, dict):
         return package_info["name"]
     else:
         return package_info.name
 
 
-def get_package_version(package_info):
+def get_package_version(package_info: Union[dict, _PackageInfo]) -> str:
+    """
+    Get package version for package info.
+
+    :param package_info: package info to get package version from.
+    :return: package version.
+    """
     if isinstance(package_info, dict):
         return package_info["version"]
     else:
@@ -20,6 +32,12 @@ def get_package_version(package_info):
 
 
 def get_packages_info(packages_names: List[str]) -> Dict[str, str]:
+    """
+    Get package name and package version of installed packages by names.
+
+    :param packages_names: list of package names to check.
+    :return: mapping of package names to package versions.
+    """
     _initialize_master_working_set()
     return {
         get_package_name(package_info): get_package_version(package_info)
@@ -27,14 +45,26 @@ def get_packages_info(packages_names: List[str]) -> Dict[str, str]:
     }
 
 
-def parse_packages_names(args: Iterable):
+def parse_packages_names(args: Iterable) -> List[str]:
+    """
+    Parse package names from `pip install` arguments.
+
+    :param args: arguments.
+    :return: list of package names.
+    """
     packages_names = [
         x.split("==")[0] for x in args if not x.startswith("-") and x != "."
     ]
     return packages_names
 
 
-def parse_requirements_txt(path: str):
+def parse_requirements_txt(path: str) -> OrderedDict:
+    """
+    Parse requirements.txt file.
+
+    :param path: path to requirements.txt.
+    :return: mapping of package names to package versions.
+    """
     requirements_dict = OrderedDict()
     with open(path, "r") as f:
         requirements = f.readlines()

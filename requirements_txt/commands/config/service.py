@@ -1,28 +1,7 @@
-from typing import List
-
 import click
 from appdata import AppDataPaths
 
-from requirements_txt.utils.config import ALLOWED_CONFIG_KEYS, read_config, save_config
-
-
-def get_allowed_types(value: str) -> List[type]:
-    types = []
-    if value is None:
-        return [type(None)]
-    types.append(str)
-    if value.isdigit():
-        types.append(int)
-        types.append(float)
-    try:
-        float(value)
-        if float not in types:
-            types.append(float)
-    except Exception:
-        pass
-    if value in ['0', '1']:
-        types.append(bool)
-    return types
+from requirements_txt.utils.config import ALLOWED_CONFIG_KEYS, read_config, save_config, get_allowed_types
 
 
 def set_config(app_paths: AppDataPaths, key: str, value: str, global_: bool):

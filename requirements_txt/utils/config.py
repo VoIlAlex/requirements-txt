@@ -1,6 +1,6 @@
 import configparser
 import os
-from typing import Any, Optional
+from typing import Any, Optional, List
 
 from requirements_txt.utils.appdata import get_app_paths
 
@@ -19,6 +19,25 @@ ALLOWED_CONFIG_KEYS = {
         'default': False
     }
 }
+
+
+def get_allowed_types(value: str) -> List[type]:
+    types = []
+    if value is None:
+        return [type(None)]
+    types.append(str)
+    if value.isdigit():
+        types.append(int)
+        types.append(float)
+    try:
+        float(value)
+        if float not in types:
+            types.append(float)
+    except Exception:
+        pass
+    if value in ['0', '1']:
+        types.append(bool)
+    return types
 
 
 def get_config_value(key: str, global_: bool = None) -> Any:

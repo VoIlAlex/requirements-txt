@@ -9,7 +9,6 @@ repos:
     rev: 6.0.0
     hooks:
     -   id: flake8
-        ignore: E501
 -   repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:

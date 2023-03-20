@@ -5,7 +5,7 @@ from requirements_txt.utils.path import get_pip_path, get_python_path
 
 def install():
     pip_paths = []
-    for pip in ['pip', 'pip3']:
+    for pip in ["pip", "pip3"]:
         pip_path, python_name = get_pip_path(pip)
         if python_name is not None:
             python_path = get_python_path(python_name)

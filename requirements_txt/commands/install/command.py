@@ -1,6 +1,7 @@
 from requirements_txt.commands.cli import cli
-from requirements_txt.commands.install.service import \
-    install as install_to_requirements_txt
+from requirements_txt.commands.install.service import (
+    install as install_to_requirements_txt,
+)
 
 
 @cli.command()

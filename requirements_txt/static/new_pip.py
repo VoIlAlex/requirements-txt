@@ -16,9 +16,10 @@ try:
     )
     from requirements_txt.utils.config import get_config_value
 
-    requirements_handler = True
-except Exception:
-    from requirements_txt import __version__
+    try:
+        from requirements_txt import __version__
+    except ImportError:
+        __version__ = "1.0.0"
 
     major_version = int(__version__.split(".")[0])
     if major_version != PIP_RT_VERSION:
@@ -34,6 +35,10 @@ except Exception:
             "Option 1: pip install to-requirements.txt==$s.*\n" % PIP_RT_VERSION
         )
         sys.stdout.write("Option 2: requirements-txt install")
+    else:
+        requirements_handler = True
+except Exception:
+    ...
 
 if __name__ == "__main__":
     command, args = parse_command(sys.argv[1:])

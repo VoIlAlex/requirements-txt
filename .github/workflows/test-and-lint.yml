@@ -3,8 +3,8 @@ name: Test-and-lint
 on:
   push:
     branches: [develop]
-    pull_request:
-      branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
 
 jobs:
   test-and-lint:

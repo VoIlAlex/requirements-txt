@@ -3,11 +3,7 @@ Pip install to requirements.txt
 
 .. image:: https://img.shields.io/pypi/v/to-requirements.txt
 
-.. image:: https://img.shields.io/readthedocs/requirements-txt
-
-.. image:: https://img.shields.io/maintenance/yes/2021
-
-.. image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
+.. image:: https://img.shields.io/maintenance/yes/2023
 
 .. image:: https://img.shields.io/github/license/VoIlAlex/requirements-txt
 

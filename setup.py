@@ -50,7 +50,7 @@ setup(
 	],
 	# List of packages to install with this one 
 	install_requires=[
-		'appdata==2.1.2',
+		'appdata==2.2.1',
 		'click==8.0.3',
 		'colored==1.4.3',
 	],

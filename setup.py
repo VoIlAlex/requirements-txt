@@ -19,7 +19,7 @@ setup(
 	packages=find_packages('.'),
 	# Start with a small number and increase it with 
 	# every change you make https://semver.org 
-	version='1.3.0',
+	version='2.0.0',
 	# Chose a license from here: https: // 
 	# help.github.com / articles / licensing - a - 
 	# repository. For example: MIT 
@@ -50,14 +50,14 @@ setup(
 	],
 	# List of packages to install with this one 
 	install_requires=[
-		'appdata==2.1.2',
+		'appdata==2.2.1',
 		'click==8.0.3',
 		'colored==1.4.3',
 	],
 	entry_points={
 		'console_scripts': [
-			'requirements-txt-cli = requirements_txt.command:cli',
-			'rt-cli = requirements_txt.command:cli'
+			'requirements-txt-cli = requirements_txt.commands:cli',
+			'rt-cli = requirements_txt.commands:cli'
 		],
 	},
 	scripts=[

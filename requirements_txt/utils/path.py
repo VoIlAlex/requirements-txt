@@ -75,14 +75,15 @@ def find_virtualenv(path: str = None) -> Optional[str]:
     """
     path = path or os.getcwd()
     for file in os.listdir(path):
-        if os.path.isdir(file):
-            files_in_dir = os.listdir(file)
+        file_path = os.path.join(path, file)
+        if os.path.isdir(file_path):
+            files_in_dir = os.listdir(file_path)
             if (
                 "bin" in files_in_dir
                 and "lib" in files_in_dir  # noqa: W503
                 and "pyvenv.cfg" in files_in_dir  # noqa: W503
             ):
-                return os.path.join(path, file)
+                return file_path
 
 
 __all__ = [

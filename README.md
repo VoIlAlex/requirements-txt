@@ -2,11 +2,7 @@
 
 [![PyPI release](https://img.shields.io/pypi/v/to-requirements.txt)](https://pypi.org/project/to-requirements.txt/)
 [![Build status](https://github.com/VoIlAlex/requirements-txt/actions/workflows/publish-to-pypi.yml/badge.svg)](https://github.com/VoIlAlex/requirements-txt/actions/workflows/publish-to-pypi.yml/badge.svg)
-[![Documentation](https://img.shields.io/readthedocs/requirements-txt)](https://requirements-txt.readthedocs.io/en/latest/)
-
-
 [![Maintainability](https://img.shields.io/maintenance/yes/2023)](https://img.shields.io/maintenance/yes/2023)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License](https://img.shields.io/github/license/VoIlAlex/requirements-txt)](https://github.com/VoIlAlex/requirements-txt/blob/master/LICENSE.md)
 
 [//]: # ([![Downloads]&#40;https://static.pepy.tech/personalized-badge/to-requirements.txt?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads&#41;]&#40;https://pepy.tech/project/appdata&#41;)

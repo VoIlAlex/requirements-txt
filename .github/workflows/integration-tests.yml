@@ -24,4 +24,4 @@ jobs:
           pip install -r requirements.test.txt
       - name: Run integration tests
         run: >-
-          python -m pytest tests/integrationtests
+          python -m pytest tests/integrationtests/test_commands

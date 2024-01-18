@@ -36,9 +36,9 @@ jobs:
           pip install
           build
           --user
-      - name: Go to rex directory
+      - name: Set rex as active alias
         run: >-
-          cd aliases/rex
+          mv ./aliases/rex/setup.py ./setup.py
       - name: Build a binary wheel and a source tarball
         run: >-
           python -m

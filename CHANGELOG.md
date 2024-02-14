@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.4] - 2024-02-14
+### Fixed 
+- Local packages and git packages installation doesn't add version to the end.
+- None version isn't displayed anymore.
+
+
 ## [1.3.0] - 2022-07-13
 ### Added
 - Command `alias` to enable sourced mode of cli execution. Works with `bash` and `zsh` shells.

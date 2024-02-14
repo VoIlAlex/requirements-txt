@@ -81,7 +81,6 @@ def add_installed_packages_to_requirements_txt(args: Iterable):
         requirements_dict[package_name] = None
 
     clustered_packages_names = cluster_package_names(list(requirements_dict.keys()))
-    print(clustered_packages_names)
     with open(requirements_txt_path, "w+") as f:
         lines_to_write = []
         lines_to_write += [

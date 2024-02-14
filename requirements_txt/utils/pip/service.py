@@ -75,27 +75,31 @@ def add_installed_packages_to_requirements_txt(args: Iterable):
                 packages_without_version.append(package_name)
         else:
             requirements_dict[package_name] = package_version
+    for package_name in clustered_packages_names["git_packages"]:
+        requirements_dict[package_name] = None
+    for package_name in clustered_packages_names["file_system_packages"]:
+        requirements_dict[package_name] = None
 
+    clustered_packages_names = cluster_package_names(list(requirements_dict.keys()))
+    print(clustered_packages_names)
     with open(requirements_txt_path, "w+") as f:
-        f.writelines([f"{package_name}\n" for package_name in packages_without_version])
-        f.writelines(
-            [
-                f"{package_name}=={requirements_dict[package_name]}\n"
-                for package_name in clustered_packages_names["pypi_packages"]
-            ]
-        )
-        f.writelines(
-            [
-                f"{package_name}\n"
-                for package_name in clustered_packages_names["git_packages"]
-            ]
-        )
-        f.writelines(
-            [
-                f"{package_name}\n"
-                for package_name in clustered_packages_names["file_system_packages"]
-            ]
-        )
+        lines_to_write = []
+        lines_to_write += [
+            f"{package_name}\n" for package_name in packages_without_version
+        ]
+        lines_to_write += [
+            f"{package_name}=={requirements_dict[package_name]}\n"
+            for package_name in clustered_packages_names["pypi_packages"]
+        ]
+        lines_to_write += [
+            f"{package_name}\n"
+            for package_name in clustered_packages_names["git_packages"]
+        ]
+        lines_to_write += [
+            f"{package_name}\n"
+            for package_name in clustered_packages_names["file_system_packages"]
+        ]
+        f.writelines(lines_to_write)
 
 
 def remove_uninstalled_packages_from_requirements_txt(args: Iterable):
@@ -122,13 +126,23 @@ def remove_uninstalled_packages_from_requirements_txt(args: Iterable):
         if package_name in args_packages_names and package_name not in packages:
             del requirements_dict[package_name]
 
+    clustered_packages_names = cluster_package_names(list(requirements_dict.keys()))
+
     with open(requirements_txt_path, "w+") as f:
-        f.writelines(
-            [
-                f"{package_name}=={package_version}\n"
-                for package_name, package_version in requirements_dict.items()
-            ]
-        )
+        lines_to_write = []
+        lines_to_write += [
+            f"{package_name}=={requirements_dict[package_name]}\n"
+            for package_name in clustered_packages_names["pypi_packages"]
+        ]
+        lines_to_write += [
+            f"{package_name}\n"
+            for package_name in clustered_packages_names["git_packages"]
+        ]
+        lines_to_write += [
+            f"{package_name}\n"
+            for package_name in clustered_packages_names["file_system_packages"]
+        ]
+        f.writelines(lines_to_write)
 
 
 __all__ = [

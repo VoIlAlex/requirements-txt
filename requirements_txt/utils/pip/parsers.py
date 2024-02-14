@@ -62,7 +62,7 @@ def parse_packages_names(args: Iterable) -> List[str]:
     :return: list of package names.
     """
     packages_names = [
-        x.split("==")[0] for x in args if not x.startswith("-") and x != "."
+        x.split("==")[0].strip() for x in args if not x.startswith("-") and x != "."
     ]
     return packages_names
 

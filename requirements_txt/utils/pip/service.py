@@ -75,9 +75,9 @@ def add_installed_packages_to_requirements_txt(args: Iterable):
                 packages_without_version.append(package_name)
         else:
             requirements_dict[package_name] = package_version
-    for package_name in clustered_packages_names['git_packages']:
+    for package_name in clustered_packages_names["git_packages"]:
         requirements_dict[package_name] = None
-    for package_name in clustered_packages_names['file_system_packages']:
+    for package_name in clustered_packages_names["file_system_packages"]:
         requirements_dict[package_name] = None
 
     clustered_packages_names = cluster_package_names(list(requirements_dict.keys()))

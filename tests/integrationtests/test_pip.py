@@ -1,4 +1,3 @@
-import re
 import sys
 import tempfile
 import os
@@ -22,7 +21,6 @@ def virtual_environment():
 
 
 def init_rt():
-    subprocess.run(['./venv/bin/pip', 'install', CURRENT_DIR])
     subprocess.run(['./venv/bin/rt', 'i'])
 
 
@@ -45,20 +43,17 @@ def is_importable(module_name: str):
 class TestPIP:
     def test_package_installation(self):
         with virtual_environment() as path:
-            init_rt()
             install_package('appdata==2.2.1')
             requirements_txt_path = os.path.join(path, 'requirements.txt')
             with open(requirements_txt_path, 'r') as requirements_file:
                 requirements = [x.strip() for x in requirements_file.readlines()]
 
-            assert len(requirements) == 3
-            assert re.compile('to-requirements\.txt==.*').fullmatch(requirements[0])
-            assert requirements[1] == 'appdata==2.2.1'
+            assert len(requirements) == 1
+            assert requirements[0] == 'appdata==2.2.1'
             assert is_importable('appdata')
 
     def test_local_package_installation(self):
         with virtual_environment() as path:
-            init_rt()
             path_to_local_package = os.path.join(
                 os.path.dirname(__file__),
                 'test_package',
@@ -67,41 +62,48 @@ class TestPIP:
             requirements_txt_path = os.path.join(path, 'requirements.txt')
             with open(requirements_txt_path, 'r') as requirements_file:
                 requirements = [x.strip() for x in requirements_file.readlines()]
-            assert len(requirements) == 3
-            assert re.compile('to-requirements\.txt==.*').fullmatch(requirements[0])
-            assert requirements[2] == path_to_local_package
+            assert len(requirements) == 1
+            assert requirements[0] == path_to_local_package
             assert is_importable('test_package')
 
     def test_git_package_installation(self):
         with virtual_environment() as path:
-            init_rt()
             package_name = "git+https://github.com/VoIlAlex/appdata.git"
             install_package(package_name)
             requirements_txt_path = os.path.join(path, 'requirements.txt')
             with open(requirements_txt_path, 'r') as requirements_file:
                 requirements = [x.strip() for x in requirements_file.readlines()]
 
-            assert len(requirements) == 3
-            assert re.compile('to-requirements\.txt==.*').fullmatch(requirements[0])
-            assert requirements[1] == package_name
+            assert len(requirements) == 1
+            assert requirements[0] == package_name
             assert is_importable('appdata')
+
+    def test_double_init(self):
+        with virtual_environment() as path:
+            requirements_txt_path = os.path.join(path, 'requirements.txt')
+            with open(requirements_txt_path, 'r') as requirements_file:
+                requirements = [x.strip() for x in requirements_file.readlines()]
+            assert len(requirements) == 0
+
+            init_rt()
+            with open(requirements_txt_path, 'r') as requirements_file:
+                requirements = [x.strip() for x in requirements_file.readlines()]
+            assert len(requirements) == 0
 
     def test_package_uninstallation(self):
         with virtual_environment() as path:
-            init_rt()
             install_package('appdata==2.2.1')
             requirements_txt_path = os.path.join(path, 'requirements.txt')
             with open(requirements_txt_path, 'r') as requirements_file:
                 requirements = [x.strip() for x in requirements_file.readlines()]
 
-            assert len(requirements) == 3
-            assert re.compile('to-requirements\.txt==.*').fullmatch(requirements[0])
-            assert requirements[1] == 'appdata==2.2.1'
+            assert len(requirements) == 1
+            assert requirements[0] == 'appdata==2.2.1'
             assert is_importable('appdata')
 
             uninstall_package('appdata')
             with open(requirements_txt_path, 'r') as requirements_file:
                 requirements = [x.strip() for x in requirements_file.readlines()]
 
-            assert len(requirements) == 2
+            assert len(requirements) == 0
             assert not is_importable('appdata')

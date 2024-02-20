@@ -45,12 +45,16 @@ def init_virtual_env(verbose: bool = False):
     logger.info(" Done.\n")
 
     logger.info("Installing to-requirements.txt to virtual environment...")
-    subprocess.call(
-        [f"{venv_path}/bin/pip", "install", "to-requirements.txt"],
-        stdout=stdout,
-        stderr=stderr,
-    )
-    logger.info(" Done.\n")
+    if not os.path.exists(f"{venv_path}/bin/requirements-txt"):
+        subprocess.call(
+            [f"{venv_path}/bin/pip", "install", "to-requirements.txt"],
+            stdout=stdout,
+            stderr=stderr,
+        )
+        logger.info(" Done.\n")
+    else:
+        logger.info(" Skip.\n")
+
     logger.info("Setting up to-requirements.txt...")
     install_for_venv()
     logger.info(" Done.\n")

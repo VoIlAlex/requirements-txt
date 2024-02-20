@@ -28,8 +28,25 @@ fi
 
 # Activating virtual environment function
 
-contains() {
-    [[ $list =~ (^| )$x($| ) ]] && echo '0' || echo '1'
+search_in_path() {
+    local search_string=$1
+
+    # Flag to indicate if the string was found
+    local found=0
+    # Loop through the array and search for the string
+    for item in $(ls $2); do
+        if [ "$item" = "$search_string" ]; then
+            found=1
+            break
+        fi
+    done
+
+    # Check if the string was found
+    if [ $found -eq 1 ]; then
+        echo "0"
+    else
+        echo "1"
+    fi
 }
 
 activate_virtual_env() {
@@ -37,14 +54,18 @@ activate_virtual_env() {
   do
       if [[ -d "./$file" ]]
       then
-          files_in_folder=$(ls "./$file")
-          pyvenv_exists=$(contains files_in_folder "pyvenv.cfg")
-          bin_exists=$(contains files_in_folder "bin")
-
-          if [ "$pyvenv_exists" = "0" ] && [ "$bin_exists" = "0" ]
+          pyvenv_exists=$(search_in_path "pyvenv.cfg" "./$file")
+          bin_exists=$(search_in_path "bin" "./$file" )
+          lib_exists=$(search_in_path "lib" "./$file" )
+          if [ "$pyvenv_exists" = "0" ] && [ "$bin_exists" = "0" ] && [ "$lib_exists" = "0" ]
           then
+            activate_exists=$(search_in_path "activate" "./$file/bin")
+
+            if [ "$activate_exists" = "0" ]
+            then
               source "./$file/bin/activate"
-              break 2
+              break 3
+            fi
           fi
       fi
   done

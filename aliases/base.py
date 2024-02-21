@@ -1,7 +1,7 @@
 from distutils.core import setup
 import os
 from setuptools import find_packages
-from setuptools.command.install import install
+from requirements_txt import __version__
 
 # User-friendly description from README.md
 current_directory = os.path.dirname(
@@ -22,7 +22,7 @@ def run_setup(package_name: str, directory: str = '.'):
         packages=find_packages(directory),
         # Start with a small number and increase it with
         # every change you make https://semver.org
-        version='2.0.7',
+        version=__version__,
         # Chose a license from here: https: //
         # help.github.com / articles / licensing - a -
         # repository. For example: MIT
@@ -54,8 +54,8 @@ def run_setup(package_name: str, directory: str = '.'):
         # List of packages to install with this one
         install_requires=[
             'appdata==2.2.1',
-            'click==8.0.3',
-            'colored==1.4.3',
+            'click>=8.0.3',
+            'colored>=1.4.3',
         ],
         entry_points={
             'console_scripts': [

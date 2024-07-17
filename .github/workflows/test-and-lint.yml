@@ -23,7 +23,7 @@ jobs:
       - name: Install requirements.test.txt
         run: >-
           python -m 
-          pip install -r requirements.test.txt
+          pip install -r requirements.test.3.7.txt
       - name: Run unit tests
         run: >-
           python -m pytest tests/unittests
@@ -95,7 +95,7 @@ jobs:
       - name: Install requirements.test.txt
         run: >-
           python -m 
-          pip install -r requirements.test.3.7.txt
+          pip install -r requirements.test.txt
       - name: Run unit tests
         run: >-
           python -m pytest tests/unittests

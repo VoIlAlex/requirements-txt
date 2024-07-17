@@ -134,7 +134,7 @@ jobs:
           python -m pytest tests/unittests
 
   integration-tests-3-8:
-    needs: test-and-lint-3-8
+    needs: test-3-8
     name: Run integration tests for 3.8
     runs-on: ubuntu-latest
     steps:
@@ -155,7 +155,7 @@ jobs:
         run: >-
           python -m pytest tests/integrationtests/test_commands
   integration-tests-3-9:
-    needs: test-and-lint-3-9
+    needs: test-3-9
     name: Run integration tests for 3.9
     runs-on: ubuntu-latest
     steps:
@@ -176,7 +176,7 @@ jobs:
         run: >-
           python -m pytest tests/integrationtests/test_commands
   integration-tests-3-10:
-    needs: test-and-lint-3-10
+    needs: test-3-10
     name: Run integration tests for 3.10
     runs-on: ubuntu-latest
     steps:
@@ -197,7 +197,7 @@ jobs:
         run: >-
           python -m pytest tests/integrationtests/test_commands
   integration-tests-3-11:
-    needs: test-and-lint-3-11
+    needs: test-3-11
     name: Run integration tests for 3.11
     runs-on: ubuntu-latest
     steps:
@@ -218,7 +218,7 @@ jobs:
         run: >-
           python -m pytest tests/integrationtests/test_commands
   integration-tests-3-12:
-    needs: test-and-lint-3-12
+    needs: test-3-12
     name: Run integration tests for 3.12
     runs-on: ubuntu-latest
     steps:

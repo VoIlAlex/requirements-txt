@@ -10,16 +10,10 @@ class TestCommandShow:
         runner = CliRunner()
 
         with runner.isolated_filesystem():
-            requirements_txt_path = os.path.join(
-                os.getcwd(),
-                "requirements.txt"
-            )
+            requirements_txt_path = os.path.join(os.getcwd(), "requirements.txt")
 
-            with open(requirements_txt_path, 'w+') as f:
-                f.writelines([
-                    "appdata==1.0.0\n",
-                    "something==2.3.1"
-                ])
+            with open(requirements_txt_path, "w+") as f:
+                f.writelines(["appdata==1.0.0\n", "something==2.3.1"])
 
             result = runner.invoke(cli, ["show"])
             assert result.stdout == "appdata==1.0.0\nsomething==2.3.1\n"
@@ -28,12 +22,9 @@ class TestCommandShow:
         runner = CliRunner()
 
         with runner.isolated_filesystem():
-            requirements_txt_path = os.path.join(
-                os.getcwd(),
-                "requirements.txt"
-            )
+            requirements_txt_path = os.path.join(os.getcwd(), "requirements.txt")
 
-            with open(requirements_txt_path, 'w+') as f:
+            with open(requirements_txt_path, "w+") as f:
                 ...
 
             result = runner.invoke(cli, ["show"])
@@ -45,16 +36,10 @@ class TestCommandS:
         runner = CliRunner()
 
         with runner.isolated_filesystem():
-            requirements_txt_path = os.path.join(
-                os.getcwd(),
-                "requirements.txt"
-            )
+            requirements_txt_path = os.path.join(os.getcwd(), "requirements.txt")
 
-            with open(requirements_txt_path, 'w+') as f:
-                f.writelines([
-                    "appdata==1.0.0\n",
-                    "something==2.3.1"
-                ])
+            with open(requirements_txt_path, "w+") as f:
+                f.writelines(["appdata==1.0.0\n", "something==2.3.1"])
 
             result = runner.invoke(cli, ["s"])
             assert result.stdout == "appdata==1.0.0\nsomething==2.3.1\n"
@@ -63,12 +48,9 @@ class TestCommandS:
         runner = CliRunner()
 
         with runner.isolated_filesystem():
-            requirements_txt_path = os.path.join(
-                os.getcwd(),
-                "requirements.txt"
-            )
+            requirements_txt_path = os.path.join(os.getcwd(), "requirements.txt")
 
-            with open(requirements_txt_path, 'w+') as f:
+            with open(requirements_txt_path, "w+") as f:
                 ...
 
             result = runner.invoke(cli, ["s"])

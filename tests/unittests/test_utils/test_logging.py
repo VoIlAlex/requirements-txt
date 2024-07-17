@@ -2,7 +2,11 @@ from unittest.mock import patch
 
 from colored import attr, fg
 
-from requirements_txt.utils.logging import set_verbose, logger_handler, show_all_done_message
+from requirements_txt.utils.logging import (
+    set_verbose,
+    logger_handler,
+    show_all_done_message,
+)
 
 
 class TestSetVerbose:

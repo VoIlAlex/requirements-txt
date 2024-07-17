@@ -13,13 +13,12 @@ class TestOverridePip:
         new_pip_path = os.path.join(
             Path(__file__).parents[3].absolute(),
             "requirements_txt",
-            'static',
-            'new_pip.py'
+            "static",
+            "new_pip.py",
         )
-        mock_open.assert_has_calls([
-            call("/path/to/pip", "w+"),
-            call(new_pip_path)
-        ], any_order=True)
+        mock_open.assert_has_calls(
+            [call("/path/to/pip", "w+"), call(new_pip_path)], any_order=True
+        )
 
         mock_open.return_value.__enter__.return_value.write.assert_called_once_with(
             mock_open.return_value.__enter__.return_value.read.return_value.format.return_value

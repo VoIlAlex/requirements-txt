@@ -4,20 +4,22 @@ from unittest.mock import patch, Mock, PropertyMock, MagicMock
 
 from appdata import AppDataPaths, get_home_folder
 
-from requirements_txt.utils.appdata import validate_app_data_decorator, validate_app_data, insert_app_paths, \
-    get_app_paths
+from requirements_txt.utils.appdata import (
+    validate_app_data_decorator,
+    validate_app_data,
+    insert_app_paths,
+    get_app_paths,
+)
 
 
 @patch(
     "requirements_txt.utils.appdata.AppDataPaths.require_setup",
-    new_callable=PropertyMock
+    new_callable=PropertyMock,
 )
 @patch("requirements_txt.utils.appdata.AppDataPaths.setup")
 class TestValidateAppDataDecorator:
     def test_validate_app_data_decorator_1(
-            self,
-            app_paths_setup_mock: Mock,
-            require_setup_mock: Mock
+        self, app_paths_setup_mock: Mock, require_setup_mock: Mock
     ):
         require_setup_mock.return_value = True
 
@@ -29,9 +31,7 @@ class TestValidateAppDataDecorator:
         app_paths_setup_mock.assert_called_once()
 
     def test_validate_app_data_decorator_2(
-            self,
-            app_paths_setup_mock: Mock,
-            require_setup_mock: Mock
+        self, app_paths_setup_mock: Mock, require_setup_mock: Mock
     ):
         require_setup_mock.return_value = False
 
@@ -48,8 +48,7 @@ class TestValidateAppData:
     def test_validate_app_data_1(self, get_app_paths_mock: Mock):
         setup_mock = Mock(return_value=None)
         get_app_paths_mock.return_value = SimpleNamespace(
-            require_setup=True,
-            setup=setup_mock
+            require_setup=True, setup=setup_mock
         )
         validate_app_data(global_=False)
         get_app_paths_mock.assert_called_once_with(False)
@@ -58,8 +57,7 @@ class TestValidateAppData:
     def test_validate_app_data_2(self, get_app_paths_mock: Mock):
         setup_mock = Mock(return_value=None)
         get_app_paths_mock.return_value = SimpleNamespace(
-            require_setup=False,
-            setup=setup_mock
+            require_setup=False, setup=setup_mock
         )
         validate_app_data(global_=True)
         get_app_paths_mock.assert_called_once_with(True)

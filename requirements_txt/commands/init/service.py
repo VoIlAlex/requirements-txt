@@ -20,14 +20,14 @@ def init_virtual_env(verbose: bool = False):
             stdout=stdout,
             stderr=stderr,
             check=True,
-            text=True
+            text=True,
         )
         subprocess.call(
             [sys.executable, "-m", "virtualenv", "venv"],
             stdout=stdout,
             stderr=stderr,
             check=True,
-            text=True
+            text=True,
         )
         logger.info(" Done.\n")
         venv_path = "./venv"

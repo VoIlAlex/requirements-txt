@@ -9,24 +9,17 @@ from requirements_txt.commands import cli
 class TestCommandInstall:
     @patch("requirements_txt.commands.install.service.get_pip_path")
     @patch("requirements_txt.commands.install.service.get_python_path")
-    def test_command_init(self, get_python_path_mock: Mock, get_pip_path_mock: Mock, temp_dir):
+    def test_command_init(
+        self, get_python_path_mock: Mock, get_pip_path_mock: Mock, temp_dir
+    ):
         runner = CliRunner()
         with runner.isolated_filesystem():
-            pip_path = os.path.join(
-                os.getcwd(),
-                "pip"
-            )
-            with open(pip_path, 'w+'):
+            pip_path = os.path.join(os.getcwd(), "pip")
+            with open(pip_path, "w+"):
                 ...
-            get_pip_path_mock.side_effect = [
-                (pip_path, "python"),
-                (None, None)
-            ]
+            get_pip_path_mock.side_effect = [(pip_path, "python"), (None, None)]
 
-            python_path = os.path.join(
-                os.getcwd(),
-                "python"
-            )
+            python_path = os.path.join(os.getcwd(), "python")
             get_python_path_mock.return_value = python_path
 
             result = runner.invoke(cli, ["install"])

@@ -1,8 +1,10 @@
 import os
 from unittest.mock import patch, Mock
 
-from requirements_txt.utils.pip import add_installed_packages_to_requirements_txt, \
-    remove_uninstalled_packages_from_requirements_txt
+from requirements_txt.utils.pip import (
+    add_installed_packages_to_requirements_txt,
+    remove_uninstalled_packages_from_requirements_txt,
+)
 
 
 @patch("requirements_txt.utils.pip.service.parse_packages_names")
@@ -20,21 +22,16 @@ class TestAddInstalledPackagesToRequirementsTxt:
         parse_packages_names_mock: Mock,
         temp_dir,
     ):
-        requirements_txt_path_exp = os.path.join(
-            os.getcwd(),
-            'requirements.txt'
-        )
+        requirements_txt_path_exp = os.path.join(os.getcwd(), "requirements.txt")
         parse_packages_names_mock.return_value = ["appdata"]
-        get_packages_info_mock.return_value = {
-            "appdata": "1.0.0"
-        }
+        get_packages_info_mock.return_value = {"appdata": "1.0.0"}
         check_git_only_restriction_mock.return_value = True
         get_requirements_txt_path_mock.return_value = (requirements_txt_path_exp, False)
         parse_requirements_txt_mock.return_value = {}
 
         add_installed_packages_to_requirements_txt(["appdata==1.0.0"])
 
-        with open(requirements_txt_path_exp, 'r') as f:
+        with open(requirements_txt_path_exp, "r") as f:
             assert f.read() == "appdata==1.0.0\n"
 
         parse_packages_names_mock.assert_called_once_with(["appdata==1.0.0"])
@@ -53,17 +50,12 @@ class TestAddInstalledPackagesToRequirementsTxt:
         temp_dir,
     ):
         parse_packages_names_mock.return_value = ["appdata"]
-        get_packages_info_mock.return_value = {
-            "appdata": "1.0.0"
-        }
+        get_packages_info_mock.return_value = {"appdata": "1.0.0"}
         check_git_only_restriction_mock.return_value = False
 
         add_installed_packages_to_requirements_txt(["appdata==1.0.0"])
 
-        requirements_txt_path_exp = os.path.join(
-            os.getcwd(),
-            'requirements.txt'
-        )
+        requirements_txt_path_exp = os.path.join(os.getcwd(), "requirements.txt")
         assert not os.path.exists(requirements_txt_path_exp)
 
         parse_packages_names_mock.assert_called_once_with(["appdata==1.0.0"])
@@ -82,18 +74,13 @@ class TestAddInstalledPackagesToRequirementsTxt:
         temp_dir,
     ):
         parse_packages_names_mock.return_value = ["appdata"]
-        get_packages_info_mock.return_value = {
-            "appdata": "1.0.0"
-        }
+        get_packages_info_mock.return_value = {"appdata": "1.0.0"}
         check_git_only_restriction_mock.return_value = True
         get_requirements_txt_path_mock.return_value = (None, False)
 
         add_installed_packages_to_requirements_txt(["appdata==1.0.0"])
 
-        requirements_txt_path_exp = os.path.join(
-            os.getcwd(),
-            'requirements.txt'
-        )
+        requirements_txt_path_exp = os.path.join(os.getcwd(), "requirements.txt")
         assert not os.path.exists(requirements_txt_path_exp)
 
         parse_packages_names_mock.assert_called_once_with(["appdata==1.0.0"])
@@ -118,16 +105,9 @@ class TestRemoveUninstalledPackagesFromRequirementsTxt:
         parse_packages_names_mock: Mock,
         temp_dir,
     ):
-        requirements_txt_path_exp = os.path.join(
-            os.getcwd(),
-            'requirements.txt'
-        )
-        with open(requirements_txt_path_exp, 'w+') as f:
-            f.writelines([
-                "appdata==0.2.1\n",
-                "something==2.1.1\n",
-                "other==2.1.5\n"
-            ])
+        requirements_txt_path_exp = os.path.join(os.getcwd(), "requirements.txt")
+        with open(requirements_txt_path_exp, "w+") as f:
+            f.writelines(["appdata==0.2.1\n", "something==2.1.1\n", "other==2.1.5\n"])
 
         parse_packages_names_mock.return_value = ["something"]
         get_packages_info_mock.return_value = {}
@@ -136,12 +116,12 @@ class TestRemoveUninstalledPackagesFromRequirementsTxt:
         parse_requirements_txt_mock.return_value = {
             "appdata": "0.2.1",
             "something": "2.1.1",
-            "other": "2.1.5"
+            "other": "2.1.5",
         }
 
         remove_uninstalled_packages_from_requirements_txt(["something"])
 
-        with open(requirements_txt_path_exp, 'r') as f:
+        with open(requirements_txt_path_exp, "r") as f:
             assert f.read() == "appdata==0.2.1\nother==2.1.5\n"
 
         parse_packages_names_mock.assert_called_once_with(["something"])
@@ -159,7 +139,6 @@ class TestRemoveUninstalledPackagesFromRequirementsTxt:
         parse_packages_names_mock: Mock,
         temp_dir,
     ):
-
         parse_packages_names_mock.return_value = ["something"]
         get_packages_info_mock.return_value = {}
         check_git_only_restriction_mock.return_value = False
@@ -181,7 +160,6 @@ class TestRemoveUninstalledPackagesFromRequirementsTxt:
         parse_packages_names_mock: Mock,
         temp_dir,
     ):
-
         parse_packages_names_mock.return_value = ["something"]
         get_packages_info_mock.return_value = {}
         check_git_only_restriction_mock.return_value = True
@@ -194,4 +172,3 @@ class TestRemoveUninstalledPackagesFromRequirementsTxt:
         check_git_only_restriction_mock.assert_called_once_with()
         get_requirements_txt_path_mock.assert_called_once_with(try_create=False)
         parse_requirements_txt_mock.assert_not_called()
-

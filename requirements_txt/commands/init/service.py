@@ -19,15 +19,15 @@ def init_virtual_env(verbose: bool = False):
             [sys.executable, "-m", "pip", "install", "virtualenv"],
             stdout=stdout,
             stderr=stderr,
-            check=True,
-            text=True,
         )
         subprocess.call(
             [sys.executable, "-m", "virtualenv", "venv"],
             stdout=stdout,
             stderr=stderr,
-            check=True,
-            text=True,
+        )
+        shell_command = "ls -l"
+        result = subprocess.run(
+            shell_command, shell=True, check=True, text=True, capture_output=True
         )
         logger.info(" Done.\n")
         venv_path = "./venv"

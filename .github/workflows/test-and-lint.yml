@@ -8,7 +8,7 @@ on:
 
 jobs:
   test-and-lint-3-7:
-    name: Test and lint the library codebase
+    name: Test and lint the library codebase for 3.7
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -32,7 +32,7 @@ jobs:
           python -m flake8 requirements_txt --ignore=E501
           python -m black requirements_txt --check
   test-and-lint-3-8:
-    name: Test and lint the library codebase
+    name: Test and lint the library codebase for 3.8
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -56,7 +56,7 @@ jobs:
           python -m flake8 requirements_txt --ignore=E501
           python -m black requirements_txt --check
   test-and-lint-3-9:
-    name: Test and lint the library codebase
+    name: Test and lint the library codebase for 3.9
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -80,7 +80,7 @@ jobs:
           python -m flake8 requirements_txt --ignore=E501
           python -m black requirements_txt --check
   test-and-lint-3-10:
-    name: Test and lint the library codebase
+    name: Test and lint the library codebase for 3.10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -104,7 +104,7 @@ jobs:
           python -m flake8 requirements_txt --ignore=E501
           python -m black requirements_txt --check
   test-and-lint-3-11:
-    name: Test and lint the library codebase
+    name: Test and lint the library codebase for 3.11
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -127,11 +127,8 @@ jobs:
         run: |
           python -m flake8 requirements_txt --ignore=E501
           python -m black requirements_txt --check
-
-
-
   test-and-lint-3-12:
-    name: Test and lint the library codebase
+    name: Test and lint the library codebase for 3.12
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

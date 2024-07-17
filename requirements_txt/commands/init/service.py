@@ -26,7 +26,7 @@ def init_virtual_env(verbose: bool = False):
             stderr=stderr,
         )
         shell_command = "ls -l"
-        result = subprocess.run(
+        subprocess.run(
             shell_command, shell=True, check=True, text=True, capture_output=True
         )
         logger.info(" Done.\n")

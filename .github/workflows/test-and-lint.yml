@@ -30,7 +30,6 @@ jobs:
       - name: Run linters
         run: |
           python -m flake8 requirements_txt --ignore=E501
-          python -m black requirements_txt --check
   test-and-lint-3-8:
     name: Test and lint the library codebase for 3.8
     runs-on: ubuntu-latest

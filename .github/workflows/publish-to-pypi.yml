@@ -274,6 +274,8 @@ jobs:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
   build-n-publish-toreqs:
+    needs:
+      - build-n-publish
     name: Build and publish Python 🐍 distributions 📦 to PyPI (toreqs)
     runs-on: ubuntu-latest
     steps:
